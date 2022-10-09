@@ -1,6 +1,6 @@
 ﻿using LeaveManagementWebAPI.Contexts;
 using LeaveManagementWebAPI.Models;
-using LeaveManagementWebAPI.Repositories.Data;
+using LeaveManagementWebAPI.Repositories.Datas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

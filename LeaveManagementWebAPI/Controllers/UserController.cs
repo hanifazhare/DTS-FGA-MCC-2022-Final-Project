@@ -1,5 +1,5 @@
 ﻿using LeaveManagementWebAPI.Models.ViewModels;
-using LeaveManagementWebAPI.Repositories.Data;
+using LeaveManagementWebAPI.Repositories.Datas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
