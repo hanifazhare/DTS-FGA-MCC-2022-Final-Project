@@ -35,6 +35,11 @@ namespace LeaveManagementWebAPI.Models
         [ForeignKey("DepartmentType")]
         public int departmentId { get; set; }
 
+        public Employee employee { get; set; }
+
+        [ForeignKey("employee")]
+        public int? managerId { get; set; }
+
         [Required]
         [Column(TypeName = "datetime")]
         public DateTime createdAt { get; set; }
