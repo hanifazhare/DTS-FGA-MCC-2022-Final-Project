@@ -12,7 +12,7 @@ namespace LeaveManagementWebAPI.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Setup Employee Model
+            //Config Employee Model
             modelBuilder.Entity<Employee>()
                 .HasIndex(model => new { model.email, model.phoneNumber })
                 .IsUnique();
@@ -25,7 +25,7 @@ namespace LeaveManagementWebAPI.Contexts
                 .Property(model => model.updatedAt)
                 .HasDefaultValueSql("getdate()");
 
-            //Setup User Model
+            //Config User Model
             modelBuilder.Entity<User>()
                 .Property(model => model.userRoleTypeId)
                 .HasDefaultValue(2);
@@ -42,7 +42,7 @@ namespace LeaveManagementWebAPI.Contexts
                 .Property(model => model.updatedAt)
                 .HasDefaultValueSql("getdate()");
 
-            //Setup LeaveRequest Model
+            //Config LeaveRequest Model
             modelBuilder.Entity<LeaveRequest>()
                 .Property(model => model.leaveStatusTypeId)
                 .HasDefaultValue(1);

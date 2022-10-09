@@ -1,6 +1,6 @@
-﻿namespace LeaveManagementWebClient.Models.ViewModel
+﻿namespace LeaveManagementWebClient.Models.ViewModels
 {
-    public class Login
+    public class LoginViewModel
     {
         public string Email { get; set; }
 

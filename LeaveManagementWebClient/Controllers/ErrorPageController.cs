@@ -2,7 +2,7 @@
 
 namespace LeaveManagementWebClient.Controllers
 {
-    public class ErrorPage : Controller
+    public class ErrorPageController : Controller
     {
         public IActionResult Error404()
         {

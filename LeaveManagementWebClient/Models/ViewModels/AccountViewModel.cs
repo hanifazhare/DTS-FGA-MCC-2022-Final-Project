@@ -1,4 +1,4 @@
-﻿namespace LeaveManagementWebClient.Models.ViewModel
+﻿namespace LeaveManagementWebClient.Models.ViewModels
 {
     public class AccountViewModel
     {

@@ -1,4 +1,4 @@
-﻿using LeaveManagementWebClient.Models.ViewModel;
+﻿using LeaveManagementWebClient.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,7 +18,7 @@ namespace LeaveManagementWebClient.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Login login)
+        public IActionResult Login(LoginViewModel login)
         {
             var emailHere = login.Email;
             var passHere = login.Password;
@@ -53,7 +53,7 @@ namespace LeaveManagementWebClient.Controllers
             var result = HttpClient.PostAsync(address, content).Result;
             if (result.IsSuccessStatusCode)
             {
-                var data = JsonConvert.DeserializeObject<ResponseClient>(await result.Content.ReadAsStringAsync());
+                var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
                 HttpContext.Session.SetString("Role", "Unauthorized");
                 return RedirectToAction("Login", "AccountMVC");
             }
@@ -78,7 +78,7 @@ namespace LeaveManagementWebClient.Controllers
             var result = HttpClient.PostAsync(address, content).Result;
             if (result.IsSuccessStatusCode)
             {
-                var data = JsonConvert.DeserializeObject<ResponseClient>(await result.Content.ReadAsStringAsync());
+                var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
                 HttpContext.Session.SetString("Role", "Unauthorized");
                 return RedirectToAction("Login", "AccountMVC");
             }
@@ -103,7 +103,7 @@ namespace LeaveManagementWebClient.Controllers
             var result = HttpClient.PostAsync(address, content).Result;
             if (result.IsSuccessStatusCode)
             {
-                var data = JsonConvert.DeserializeObject<ResponseClient>(await result.Content.ReadAsStringAsync());
+                var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
                 HttpContext.Session.SetString("Role", "Unauthorized");
                 return RedirectToAction("Login", "AccountMVC");
             }

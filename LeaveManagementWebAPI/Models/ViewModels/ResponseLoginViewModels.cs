@@ -1,6 +1,6 @@
-﻿namespace LeaveManagementWebAPI.Models.ViewModel
+﻿namespace LeaveManagementWebAPI.Models.ViewModels
 {
-    public class ResponseLogin
+    public class ResponseLoginViewModels
     {
         public int Id { get; set; }
         public string Email { get; set; }

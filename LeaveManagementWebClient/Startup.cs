@@ -30,6 +30,8 @@ namespace LeaveManagementWebClient
             //Implement DbContext
             services.AddDbContext<DBContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+
+            //Implement Session
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(5);
@@ -58,6 +60,7 @@ namespace LeaveManagementWebClient
 
             app.UseAuthorization();
 
+            //Implement Session
             app.UseSession();
 
             app.UseEndpoints(endpoints =>
