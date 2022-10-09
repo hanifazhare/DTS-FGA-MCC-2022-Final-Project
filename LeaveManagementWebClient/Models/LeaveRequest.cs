@@ -9,19 +9,19 @@ namespace LeaveManagementWebClient.Models
         [Key]
         public int id { get; set; }
 
-        public LeaveType LeaveType { get; set; }
+        public LeaveType leaveType { get; set; }
 
-        [ForeignKey("LeaveType")]
+        [ForeignKey("leaveType")]
         public int leaveTypeId { get; set; }
 
-        public LeaveStatusType LeaveStatusType { get; set; }
+        public LeaveStatusType leaveStatusType { get; set; }
 
-        [ForeignKey("LeaveStatusType")]
+        [ForeignKey("leaveStatusType")]
         public int leaveStatusTypeId { get; set; }
 
-        public User User { get; set; }
+        public User user { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("user")]
         public int userId { get; set; }
 
         [Required]

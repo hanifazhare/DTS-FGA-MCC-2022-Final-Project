@@ -6,15 +6,15 @@ namespace LeaveManagementWebClient.Models
 {
     public class User
     {
-        public Employee Employee { get; set; }
+        public Employee employee { get; set; }
 
         [Key]
-        [ForeignKey("Employee")]
+        [ForeignKey("employee")]
         public int id { get; set; }
 
-        public UserRoleType UserRoleType { get; set; }
+        public UserRoleType userRoleType { get; set; }
 
-        [ForeignKey("UserRoleType")]
+        [ForeignKey("userRoleType")]
         public int userRoleTypeId { get; set; }
 
         [Required]

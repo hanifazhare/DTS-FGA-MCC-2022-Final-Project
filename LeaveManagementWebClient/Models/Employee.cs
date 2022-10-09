@@ -16,9 +16,9 @@ namespace LeaveManagementWebClient.Models
         [Column(TypeName = "varchar(255)")]
         public string lastName { get; set; }
 
-        public GenderType GenderType { get; set; }
+        public GenderType genderType { get; set; }
 
-        [ForeignKey("GenderType")]
+        [ForeignKey("genderType")]
         public int genderTypeId { get; set; }
 
         [Required]
@@ -29,10 +29,15 @@ namespace LeaveManagementWebClient.Models
         [Column(TypeName = "varchar(15)")]
         public string phoneNumber { get; set; }
 
-        public DepartmentType DepartmentType { get; set; }
+        public DepartmentType departmentType { get; set; }
 
-        [ForeignKey("DepartmentType")]
+        [ForeignKey("departmentType")]
         public int departmentId { get; set; }
+
+        public Employee employee { get; set; }
+
+        [ForeignKey("employee")]
+        public int? managerId { get; set; }
 
         [Required]
         [Column(TypeName = "datetime")]
