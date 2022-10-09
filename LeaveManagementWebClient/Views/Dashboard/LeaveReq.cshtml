@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Leave Request Page";
+    Layout = "_MainLayout";
+}
+
+<h1>Leave Request</h1>
+
+<p>
+	<a data-bs-toggle="modal" data-bs-target="#newEmployeeModal">Create New</a>
+</p>
+<table class="table" id="employeeTable">
+	<thead>
+		<tr>
+			<th>
+				Full Name
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				No. Telepon
+			</th>
+			<th>
+				Jabatan
+			</th>
+			<th>
+				Action
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<div class="modal" tabindex="-1" id="newEmployeeModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form class="row g-3">
+					<div class="col-md-6">
+						<label for="fullName" class="form-label">Nama Lengkap</label>
+						<input type="text" class="form-control" id="fullName">
+					</div>
+					<div class="col-md-6">
+						<label for="email" class="form-label">Email</label>
+						<input type="text" class="form-control" id="email">
+					</div>
+					<div class="col-md-6">
+						<label for="telpon" class="form-label">Nomor Telepon</label>
+						<input type="text" class="form-control" id="telpon">
+					</div>
+					<div class="col-md-6">
+						<label for="jabatan" class="form-label">Jabatan</label>
+						<select id="jabatan" class="form-select">
+							<option selected>Choose...</option>
+							<option value="2">Manager</option>
+							<option value="3">Staff</option>
+						</select>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="btn btn-primary" onclick="Insert(event)">Daftar</button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

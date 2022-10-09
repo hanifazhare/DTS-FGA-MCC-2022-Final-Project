@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LeaveManagementWebAPI\LeaveManagementWebAPI.csproj" />
+  </ItemGroup>
+
 </Project>

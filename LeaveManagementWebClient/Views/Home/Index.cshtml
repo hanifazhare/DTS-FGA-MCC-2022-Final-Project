@@ -1,8 +1,127 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Landing Page";
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Landing Page - Leavy</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="~/LandingPage/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/LandingPage/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#!">Leavy</a>
+            <div>
+                <a class="btn btn-primary " href="https://localhost:44323/Account/Registrasi">Sign Up</a>
+                <a class="btn btn-primary " href="https://localhost:44323/Account/Login">Sign In</a>
+            </div>
+            
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+                        <!-- Page heading-->
+                        <h1 class="mb-5">Aplikasi pengelola cuti secara online.</h1>
+                        <!-- Signup form-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Icons Grid-->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                        <h3>Fleksibel</h3>
+                        <p class="lead mb-0">Pengelolaan serta pengajuan cuti dapat dilakukan dimana saja.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                        <h3></h3>
+                        <p class="lead mb-0">Proses pengajuan dan pengelolaan cuti dapat dilakukan lebih cepat.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                        <h3>Mudah Digunakan</h3>
+                        <p class="lead mb-0">Alur sistem yang mudah dimengerti dan tampilan yang minimalis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Image Showcases-->
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('LandingPage/assets/img/bg-showcase-1.jpg')"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>Fleksibel</h2>
+                    <p class="lead mb-0">Pengelolaan dan pengajuan cuti dapat dilakukan kapan pun dan pada berbagai perangkat, sehingga mempermudah anda dalam mengajukan dan mengelola cuti.</p>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('LandingPage/assets/img/bg-showcase-2.jpg')"></div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>Updated For Bootstrap 5</h2>
+                    <p class="lead mb-0">Mempersingkat proses pengelolaan dan pengajuan cuti dengan meringkas waktu yang dibutuhkan saat melakukan pengajuan atau pengelolaan cuti secara konvensional.</p>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('LandingPage/assets/img/bg-showcase-3.jpg')"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>Mudah digunakan</h2>
+                    <p class="lead mb-0">Alur sistem dibangun dengan jelas dan mudah dimengerti, digabungkan dengan desian yang minimalis sehingga penggunaan sistem pun mudah digunakan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/LandingPage/js/scripts.js"></script>
+</body>
+</html>
+

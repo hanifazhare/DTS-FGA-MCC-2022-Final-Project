@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Leave Request Page";
+    Layout = "_MainLayout";
+}
+
+<h1>New Leave Request</h1>
+
+<h4>Leave Request</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="/SelfReport/Index" method="post">
+            <div class="form-group">
+                <label name="EmployeeId" class="control-label">Employee Id</label>
+                <input name="EmployeeId" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label name="Bulan" class="control-label">Bulan</label>
+                <input name="Bulan" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="Cuti" class="control-label">Cuti</label>
+                <input name="Cuti" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="Libur" class="control-label">Libur</label>
+                <input name="Libur" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="Status" class="control-label">Status</label>
+                <input name="Status" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
