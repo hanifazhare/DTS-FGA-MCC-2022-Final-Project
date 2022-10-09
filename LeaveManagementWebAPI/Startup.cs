@@ -1,5 +1,6 @@
 using LeaveManagementWebAPI.Contexts;
 using LeaveManagementWebAPI.Repositories.Data;
+using LeaveManagementWebAPI.Repositories.Datas;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -59,6 +60,7 @@ namespace LeaveManagementWebAPI
 
             #region Dependency Injection
 
+            services.AddScoped<AccountRepository>();
             services.AddScoped<DepartementTypeRepository>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<GenderTypeRepository>();
