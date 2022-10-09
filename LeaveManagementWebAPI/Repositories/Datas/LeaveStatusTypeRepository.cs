@@ -1,5 +1,5 @@
 ﻿using LeaveManagementWebAPI.Contexts;
-using LeaveManagementWebAPI.Repositories.Interface;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using LeaveManagementWebAPI.Models;
 using LeaveManagementWebAPI.Models.ViewModels;
 
-namespace LeaveManagementWebAPI.Repositories.Data
+namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class LeaveStatusTypeRepository : ILeaveStatusTypeRepository
     {

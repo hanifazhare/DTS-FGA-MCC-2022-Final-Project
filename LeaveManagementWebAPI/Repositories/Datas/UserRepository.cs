@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeaveManagementWebAPI.Contexts;
-using LeaveManagementWebAPI.Repositories.Interface;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 using LeaveManagementWebAPI.Models;
 using LeaveManagementWebAPI.Models.ViewModels;
 
-namespace LeaveManagementWebAPI.Repositories.Data
+namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class UserRepository : IUserRepository
     {

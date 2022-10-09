@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Models;
-using LeaveManagementWebAPI.Repositories.Interface;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 using LeaveManagementWebAPI.Contexts;
 
-namespace LeaveManagementWebAPI.Repositories.Data
+namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class EmployeeRepository : IEmployeeRepository
     {

@@ -1,9 +1,9 @@
 ﻿using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Models;
 using LeaveManagementWebAPI.Contexts;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using LeaveManagementWebAPI.Repositories.Interfaces;
 
 namespace LeaveManagementWebAPI.Repositories.Datas
 {

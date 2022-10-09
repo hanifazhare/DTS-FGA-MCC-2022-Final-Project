@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using LeaveManagementWebAPI.Contexts;
 using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Models;
-using LeaveManagementWebAPI.Repositories.Interface;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 
-namespace LeaveManagementWebAPI.Repositories.Data
+namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class UserRoleTypeRepository : IUserRoleTypeRepository
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeaveManagementWebAPI.Models.ViewModels;
-using LeaveManagementWebAPI.Repositories.Interface;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 using LeaveManagementWebAPI.Contexts;
 using LeaveManagementWebAPI.Models;
 
-namespace LeaveManagementWebAPI.Repositories.Data
+namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class GenderTypeRepository : IGenderTypeRepository
     {

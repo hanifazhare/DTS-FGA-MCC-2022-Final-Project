@@ -1,5 +1,4 @@
 using LeaveManagementWebAPI.Contexts;
-using LeaveManagementWebAPI.Repositories.Data;
 using LeaveManagementWebAPI.Repositories.Datas;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
