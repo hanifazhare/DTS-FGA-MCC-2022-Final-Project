@@ -36,6 +36,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             if (data != null)
             {
                 data.name = departmentTypeViewModel.name;
+
                 _dbContext.DepartmentTypes.Update(data);
                 result = _dbContext.SaveChanges();
 

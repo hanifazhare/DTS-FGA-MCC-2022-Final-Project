@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Models;
 using LeaveManagementWebAPI.Repositories.Interfaces;
@@ -11,85 +10,75 @@ namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        DBContext dBContext;
+        private readonly DBContext _dbContext;
 
-        public EmployeeRepository(DBContext dBContext)
+        public EmployeeRepository(DBContext dbContext)
         {
-            this.dBContext = dBContext;
+            _dbContext = dbContext;
         }
-        public int Delete(int id)
+
+        public List<Employee> GetData()
         {
-            var data = dBContext.Employees.Find(id);
-            dBContext.Employees.Remove(data);
-            var result = dBContext.SaveChanges();
+            return _dbContext.Employees.ToList();
+        }
+
+        public Employee GetData(int id)
+        {
+            return _dbContext.Employees.Find(id);
+        }
+
+        public int EditData(EmployeeViewModel employeeViewModel)
+        {
+            int result = 0;
+            var data = GetData(employeeViewModel.id);
+
+            if (data != null)
+            {
+                data.firstName = employeeViewModel.firstName;
+                data.lastName = employeeViewModel.lastName;
+                data.genderTypeId = employeeViewModel.genderTypeId;
+                data.email = employeeViewModel.email;
+                data.phoneNumber = employeeViewModel.phoneNumber;
+                data.departmentId = employeeViewModel.departmentId;
+                data.managerId = employeeViewModel.managerId;
+                data.updatedAt = DateTime.Now;
+
+                _dbContext.Employees.Update(data);
+                result = _dbContext.SaveChanges();
+
+                return result;
+
+            }
+
             return result;
         }
 
-        public List<EmployeeViewModel> Get()
+        public int CreateData(EmployeeViewModel employeeViewModel)
         {
-            var data = dBContext.Employees.Select(x => new EmployeeViewModel
+            _dbContext.Employees.Add(new Employee
             {
-                id = x.id,
-                firstName = x.firstName,
-                lastName = x.lastName,
-                genderTypeId = x.genderTypeId,
-                email = x.email,
-                phoneNumber = x.phoneNumber,
-                departmentId = x.departmentId,
-                createdAt = x.createdAt,
-                updatedAt = x.updatedAt
-            }).ToList();
-
-            return data;
-        }
-
-        public EmployeeViewModel Get(int id)
-        {
-            var data = dBContext.Employees.Where(x => x.id == id).Select(x => new EmployeeViewModel
-            {
-                id = x.id,
-                firstName = x.firstName,
-                lastName = x.lastName,
-                genderTypeId = x.genderTypeId,
-                email = x.email,
-                phoneNumber = x.phoneNumber,
-                departmentId = x.departmentId,
-                createdAt = x.createdAt,
-                updatedAt = x.updatedAt
-            }).FirstOrDefault();
-            return data;
-        }
-
-        public int Post(EmployeeViewModel employee)
-        {
-            dBContext.Employees.Add(new Employee
-            {
-                firstName = employee.firstName,
-                lastName = employee.lastName,
-                genderTypeId = employee.genderTypeId,
-                email = employee.email,
-                phoneNumber = employee.phoneNumber,
-                departmentId = employee.departmentId,
-                createdAt = employee.createdAt,
-                updatedAt = employee.updatedAt
+                firstName = employeeViewModel.firstName,
+                lastName = employeeViewModel.lastName,
+                genderTypeId = employeeViewModel.genderTypeId,
+                email = employeeViewModel.email,
+                phoneNumber = employeeViewModel.phoneNumber,
+                departmentId = employeeViewModel.departmentId,
+                managerId = employeeViewModel.managerId,
+                createdAt = DateTime.Now,
+                updatedAt = DateTime.Now
             });
-            var result = dBContext.SaveChanges();
+            var result = _dbContext.SaveChanges();
+
             return result;
         }
 
-        public int Put(int id, EmployeeViewModel employee)
+        public int DeleteData(int id)
         {
-            var data = dBContext.Employees.Find(id);
-            data.firstName = employee.firstName;
-            data.lastName = employee.lastName;
-            data.genderTypeId = employee.genderTypeId;
-            data.email = employee.email;
-            data.phoneNumber = employee.phoneNumber;
-            data.departmentId = employee.departmentId;
-            data.createdAt = employee.createdAt;
-            data.updatedAt = employee.updatedAt;
-            dBContext.Employees.Update(data);
-            var result = dBContext.SaveChanges();
+            var data = GetData(id);
+
+            _dbContext.Employees.Remove(data);
+            var result = _dbContext.SaveChanges();
+            
             return result;
         }
     }
