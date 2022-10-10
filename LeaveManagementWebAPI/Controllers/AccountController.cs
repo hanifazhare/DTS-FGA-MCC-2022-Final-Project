@@ -8,6 +8,8 @@ namespace LeaveManagementWebAPI.Controllers
     [Route("api/[controller]")]
     [EnableCors("AllowAllOrigins")]
     [ApiController]
+    [EnableCors("AllowAllOrigins")]
+
     public class AccountController : ControllerBase
     {
         private readonly AccountRepository _accountRepository;

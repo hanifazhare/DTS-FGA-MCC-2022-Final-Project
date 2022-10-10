@@ -28,8 +28,8 @@ namespace LeaveManagementWebClient
             services.AddControllersWithViews();
 
             //Implement DbContext
-            services.AddDbContext<DBContext>(option =>
-                option.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+            //services.AddDbContext<DBContext>(option =>
+                //option.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
 
             //Implement Session
             services.AddSession(options =>

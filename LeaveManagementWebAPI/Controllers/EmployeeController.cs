@@ -16,6 +16,8 @@ namespace LeaveManagementWebAPI.Controllers
     [Route("api/[controller]")]
     [EnableCors("AllowAllOrigins")]
     [ApiController]
+    [EnableCors("AllowAllOrigins")]
+
     public class EmployeeController : ControllerBase
     {
         private readonly EmployeeRepository _employeeRepository;
