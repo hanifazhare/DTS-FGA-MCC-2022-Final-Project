@@ -60,7 +60,7 @@ namespace LeaveManagementWebAPI
             #region Dependency Injection
 
             services.AddScoped<AccountRepository>();
-            services.AddScoped<DepartementTypeRepository>();
+            services.AddScoped<DepartmentTypeRepository>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<GenderTypeRepository>();
             services.AddScoped<LeaveRequestRepository>();

@@ -1,15 +1,6 @@
-﻿using LeaveManagementWebAPI.Contexts;
-using LeaveManagementWebAPI.Models;
-using LeaveManagementWebAPI.Repositories.Datas;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LeaveManagementWebAPI.Repositories.Datas;
 using LeaveManagementWebAPI.Models.ViewModels;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LeaveManagementWebAPI.Controllers
 {
@@ -17,57 +8,65 @@ namespace LeaveManagementWebAPI.Controllers
     [ApiController]
     public class DepartementTypeController : ControllerBase
     {
-        DepartementTypeRepository _repository;
+        private readonly DepartmentTypeRepository _departmentTypeRepository;
 
-        public DepartementTypeController(DepartementTypeRepository repository)
+        public DepartementTypeController(DepartmentTypeRepository departmentTypeRepository)
         {
-            this._repository = repository; 
+            _departmentTypeRepository = departmentTypeRepository;
         }
-        // READ
+
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetDataService()
         {
-            var data = _repository.Get();
+            var data = _departmentTypeRepository.GetData();
             if (data.Count == 0)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
 
-        //READ BY ID
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetDataService(int id)
         {
-            var data = _repository.Get(id);
+            var data = _departmentTypeRepository.GetData(id);
             if (data == null)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
-        // UPDATE 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, DepartementTypeViewModel departementType)
+
+        [Route("edit")]
+        [HttpPut]
+        public IActionResult EditDataService(DepartmentTypeViewModel departmentTypeViewModel)
         {
-            var result = _repository.Put(id, departementType);
+            var result = _departmentTypeRepository.EditData(departmentTypeViewModel);
             if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil mengupdate data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal mengupdate data" });
+                return Ok(new { statusCode = 200, message = "Success update data" });
+
+            return BadRequest(new { statusCode = 400, message = "Failed update data" });
         }
-        // CREATE
+
+        [Route("create")]
         [HttpPost]
-        public IActionResult Post(DepartementTypeViewModel departementType)
+        public IActionResult CreateDataService(DepartmentTypeViewModel departmentTypeViewModel)
         {
-            var result = _repository.Post(departementType);
+            var result = _departmentTypeRepository.CreateData(departmentTypeViewModel);
             if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menambah data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menambah data" });
+                return Ok(new { statusCode = 200, message = "Success create data" });
+
+            return BadRequest(new { statusCode = 400, message = "Failed create data" });
         }
-        // DELETE
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public IActionResult DeleteDataService(int id)
         {
-            var result = _repository.Delete(id);
+            var result = _departmentTypeRepository.DeleteData(id);
             if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menghapus data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menghapus data" });
+                return Ok(new { statusCode = 200, message = "Success delete data" });
+
+            return BadRequest(new { statusCode = 400, message = "Failed delete data" });
         }
     }
 }
