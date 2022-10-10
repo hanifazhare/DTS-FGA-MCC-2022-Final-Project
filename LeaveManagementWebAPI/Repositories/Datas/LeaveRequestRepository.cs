@@ -6,6 +6,7 @@ using LeaveManagementWebAPI.Models;
 using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Repositories.Interfaces;
 using LeaveManagementWebAPI.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementWebAPI.Repositories.Datas
 {
@@ -20,12 +21,20 @@ namespace LeaveManagementWebAPI.Repositories.Datas
 
         public List<LeaveRequest> GetData()
         {
-            return _dbContext.LeaveRequests.ToList();
+            return _dbContext.LeaveRequests
+                .Include(model => model.leaveType)
+                .Include(model => model.leaveStatusType)
+                .Include(model => model.user)
+                .ToList();
         }
 
         public LeaveRequest GetData(int id)
         {
-            return _dbContext.LeaveRequests.Find(id);
+            return _dbContext.LeaveRequests
+                .Include(model => model.leaveType)
+                .Include(model => model.leaveStatusType)
+                .Include(model => model.user)
+                .FirstOrDefault(model => model.id == id);
         }
 
         public int EditData(LeaveRequestViewModel leaveRequestViewModel)
