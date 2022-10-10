@@ -17,57 +17,32 @@ namespace LeaveManagementWebAPI.Controllers
     [ApiController]
     public class GenderTypeController : ControllerBase
     {
-        GenderTypeRepository _repository;
+        private readonly GenderTypeRepository _genderTypeRepository;
 
-        public GenderTypeController(GenderTypeRepository repository)
+        public GenderTypeController(GenderTypeRepository genderTypeRepository)
         {
-            this._repository = repository;
+            _genderTypeRepository = genderTypeRepository;
         }
-        // READ
+
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetDataService()
         {
-            var data = _repository.Get();
+            var data = _genderTypeRepository.GetData();
             if (data.Count == 0)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
 
-        //READ BY ID
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetDataService(int id)
         {
-            var data = _repository.Get(id);
+            var data = _genderTypeRepository.GetData(id);
             if (data == null)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
-        }
-        // UPDATE 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, GenderTypeViewModel genderType)
-        {
-            var result = _repository.Put(id, genderType);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil mengupdate data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal mengupdate data" });
-        }
-        // CREATE
-        [HttpPost]
-        public IActionResult Post(GenderTypeViewModel genderType)
-        {
-            var result = _repository.Post(genderType);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menambah data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menambah data" });
-        }
-        // DELETE
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var result = _repository.Delete(id);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menghapus data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menghapus data" });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
     }
 }

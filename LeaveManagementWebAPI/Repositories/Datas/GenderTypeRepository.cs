@@ -6,63 +6,27 @@ using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Repositories.Interfaces;
 using LeaveManagementWebAPI.Contexts;
 using LeaveManagementWebAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class GenderTypeRepository : IGenderTypeRepository
     {
-        DBContext dBContext;
+        private readonly DBContext _dbContext;
 
-        public GenderTypeRepository(DBContext dBContext)
+        public GenderTypeRepository(DBContext dbContext)
         {
-            this.dBContext = dBContext;
-        }
-        public int Delete(int id)
-        {
-            var data = dBContext.GenderTypes.Find(id);
-            dBContext.GenderTypes.Remove(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            _dbContext = dbContext;
         }
 
-        public List<GenderTypeViewModel> Get()
+        public List<GenderType> GetData()
         {
-            var data = dBContext.GenderTypes.Select(x => new GenderTypeViewModel
-            {
-                id = x.id,
-                name = x.name
-            }).ToList();
-
-            return data;
+            return _dbContext.GenderTypes.ToList();
         }
 
-        public GenderTypeViewModel Get(int id)
+        public GenderType GetData(int id)
         {
-            var data = dBContext.GenderTypes.Where(x => x.id == id).Select(x => new GenderTypeViewModel
-            {
-                id = x.id,
-                name = x.name,
-            }).FirstOrDefault();
-            return data;
-        }
-
-        public int Post(GenderTypeViewModel genderType)
-        {
-            dBContext.GenderTypes.Add(new GenderType
-            {
-                name = genderType.name
-            });
-            var result = dBContext.SaveChanges();
-            return result;
-        }
-
-        public int Put(int id, GenderTypeViewModel genderType)
-        {
-            var data = dBContext.GenderTypes.Find(id);
-            data.name = genderType.name;
-            dBContext.GenderTypes.Update(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            return _dbContext.GenderTypes.Find(id);
         }
     }
 }
