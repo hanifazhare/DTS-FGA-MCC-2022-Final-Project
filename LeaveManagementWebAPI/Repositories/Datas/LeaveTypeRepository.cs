@@ -11,57 +11,60 @@ namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class LeaveTypeRepository : ILeaveTypeRepository
     {
-        DBContext dBContext;
+        private readonly DBContext _dbContext;
 
-        public LeaveTypeRepository(DBContext dBContext)
+        public LeaveTypeRepository(DBContext dbContext)
         {
-            this.dBContext = dBContext;
+            _dbContext = dbContext;
         }
-        public int Delete(int id)
+
+        public List<LeaveType> GetData()
         {
-            var data = dBContext.LeaveTypes.Find(id);
-            dBContext.LeaveTypes.Remove(data);
-            var result = dBContext.SaveChanges();
+            return _dbContext.LeaveTypes.ToList();
+        }
+
+        public LeaveType GetData(int id)
+        {
+            return _dbContext.LeaveTypes.Find(id);
+        }
+
+        public int EditData(LeaveTypeViewModel leaveTypeViewModel)
+        {
+            int result = 0;
+            var data = GetData(leaveTypeViewModel.id);
+
+            if (data != null)
+            {
+                data.name = leaveTypeViewModel.name;
+
+                _dbContext.LeaveTypes.Update(data);
+                result = _dbContext.SaveChanges();
+
+                return result;
+
+            }
+
             return result;
         }
 
-        public List<LeaveTypeViewModel> Get()
+        public int CreateData(LeaveTypeViewModel leaveTypeViewModel)
         {
-            var data = dBContext.LeaveTypes.Select(x => new LeaveTypeViewModel
+            _dbContext.LeaveTypes.Add(new LeaveType
             {
-                id = x.id,
-                name = x.name
-            }).ToList();
-
-            return data;
-        }
-
-        public LeaveTypeViewModel Get(int id)
-        {
-            var data = dBContext.LeaveTypes.Where(x => x.id == id).Select(x => new LeaveTypeViewModel
-            {
-                id = x.id,
-                name = x.name,
-            }).FirstOrDefault();
-            return data;
-        }
-
-        public int Post(LeaveTypeViewModel leaveType)
-        {
-            dBContext.LeaveTypes.Add(new LeaveType
-            {
-                name = leaveType.name
+                name = leaveTypeViewModel.name
             });
-            var result = dBContext.SaveChanges();
+            var result = _dbContext.SaveChanges();
+            
             return result;
         }
 
-        public int Put(int id, LeaveTypeViewModel leaveType)
+        public int DeleteData(int id)
         {
-            var data = dBContext.LeaveTypes.Find(id);
-            data.name = leaveType.name;
-            dBContext.LeaveTypes.Update(data);
-            var result = dBContext.SaveChanges();
+            var data = GetData(id);
+
+            _dbContext.LeaveTypes.Remove(data);
+            var result = _dbContext.SaveChanges();
+            
             return result;
         }
     }
