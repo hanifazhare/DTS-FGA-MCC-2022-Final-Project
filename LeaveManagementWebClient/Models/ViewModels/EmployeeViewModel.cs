@@ -18,8 +18,6 @@ namespace LeaveManagementWebClient.Models.ViewModels
 
         public int departmentId { get; set; }
 
-        public string createdAt { get; set; }
-
-        public string updatedAt { get; set; }
+        public int managerId { get; set; }
     }
 }

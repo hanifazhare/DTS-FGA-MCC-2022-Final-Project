@@ -51,9 +51,12 @@ function Insert(event) {
     var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //ini ngambil value dari tiap inputan di form nya
     obj.id = 0;
-    obj.name = $("#productName").val();
-    obj.stock = parseInt($("#productStock").val());
-    obj.price = parseInt($("#productPrice").val());
+    obj.firstName = $("#firstname").val();
+    obj.lastName = $("#lastname").val();
+    obj.genderTypeId = parseInt($("#genderTypeId").val());
+    obj.email = $("#email").val();
+    obj.phoneNumber = $("#phoneNumber").val();
+    obj.departmentId = parseInt($("#departmentId").val());
     //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
     $.ajax({
         contentType: "application/json",
@@ -63,7 +66,7 @@ function Insert(event) {
     }).done((result) => {
         //buat alert pemberitahuan jika success
         alert("Karyawan berhasil ditambah!");
-        $('#productsTable').DataTable().ajax.reload();
+        $('#employeeTable').DataTable().ajax.reload();
 
     }).fail((error) => {
         console.log(error);
