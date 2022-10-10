@@ -71,5 +71,15 @@ namespace LeaveManagementWebClient.Controllers
             }
             return RedirectToAction("Error404", "ErrorPage");
         }
+
+        public IActionResult Account()
+        {
+                return View();
+        }
+
+        public IActionResult ChangePass()
+        {
+            return View();
+        }
     }
 }

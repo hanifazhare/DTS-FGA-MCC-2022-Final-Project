@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model LeaveManagementWebClient.Models.ViewModel.LeaveRequestViewModel
 @{
     ViewData["Title"] = "Leave Request Page";
     Layout = "_MainLayout";
@@ -9,22 +10,31 @@
 <h1>Leave Request</h1>
 
 <p>
-	<a data-bs-toggle="modal" data-bs-target="#newEmployeeModal">Create New</a>
+    <a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>
 </p>
 <table class="table" id="employeeTable">
 	<thead>
 		<tr>
 			<th>
-				Full Name
+				Fullname
 			</th>
 			<th>
-				Email
+				Leave Type
 			</th>
 			<th>
-				No. Telepon
+				Start Date
 			</th>
 			<th>
-				Jabatan
+				End Date
+			</th>
+			<th>
+				Requested Day
+			</th>
+			<th>
+				Reason
+			</th>
+			<th>
+				Status
 			</th>
 			<th>
 				Action
@@ -35,43 +45,241 @@
 	</tbody>
 </table>
 
-<div class="modal" tabindex="-1" id="newEmployeeModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form class="row g-3">
-					<div class="col-md-6">
-						<label for="fullName" class="form-label">Nama Lengkap</label>
-						<input type="text" class="form-control" id="fullName">
-					</div>
-					<div class="col-md-6">
-						<label for="email" class="form-label">Email</label>
-						<input type="text" class="form-control" id="email">
-					</div>
-					<div class="col-md-6">
-						<label for="telpon" class="form-label">Nomor Telepon</label>
-						<input type="text" class="form-control" id="telpon">
-					</div>
-					<div class="col-md-6">
-						<label for="jabatan" class="form-label">Jabatan</label>
-						<select id="jabatan" class="form-select">
-							<option selected>Choose...</option>
-							<option value="2">Manager</option>
-							<option value="3">Staff</option>
-						</select>
-					</div>
-					<div class="col-12">
-						<button type="submit" class="btn btn-primary" onclick="Insert(event)">Daftar</button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+<!-- Modal Create-->
+<div class="modal fade" id="createFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new leave type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeId" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="1">Cuti Sakit</option>
+                                    <option value="2">Cuti Hamil</option>
+                                    <option value="3">Cuti Penting</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestedDay" class="control-label">Requested Day</label>
+                                <input asp-for="requestedDay" class="form-control" id="requestedDay" />
+                                <span asp-validation-for="requestedDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="flex-row d-flex justify-content-center">
+                                    <div class="col-lg-6 col-11 px-1">
+                                        <div class="input-group input-daterange">
+                                            <input type="text" id="startDate" class="form-control text-left mr-2">
+                                            <label class="ml-3 form-control-placeholder" id="startDate" asp-for="startDate">Start Date</label>
+                                            <span class="fa fa-calendar" id="fa-1"></span>
+                                            <input type="text" id="endDate" class="form-control text-left ml-2">
+                                            <label class="ml-3 form-control-placeholder" id="endDate" asp-for="endDate">End Date</label>
+                                            <span class="fa fa-calendar" id="fa-2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="reason" class="control-label">Reason</label>
+                                <input asp-for="reason" class="form-control" id="reason" />
+                                <span asp-validation-for="reason" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeStatusId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeStatusId" class="form-select">
+                                    <option value="1">Pending</option>
+                                    <option value="2">Approved</option>
+                                    <option value="3">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Create" class="btn btn-primary" onclick="Insert(event)" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeId" class="form-select">
+                                    <option>Choose...</option>
+                                    <option value="1">Cuti Sakit</option>
+                                    <option value="2">Cuti Hamil</option>
+                                    <option value="3">Cuti Penting</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestedDay" class="control-label">Requested Day</label>
+                                <input asp-for="requestedDay" class="form-control" id="requestedDay" />
+                                <span asp-validation-for="requestedDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="flex-row d-flex justify-content-center">
+                                    <div class="col-lg-6 col-11 px-1">
+                                        <div class="input-group input-daterange">
+                                            <input type="text" id="startDate" class="form-control text-left mr-2">
+                                            <label class="ml-3 form-control-placeholder" id="startDate" asp-for="startDate">Start Date</label>
+                                            <span class="fa fa-calendar" id="fa-1"></span>
+                                            <input type="text" id="endDate" class="form-control text-left ml-2">
+                                            <label class="ml-3 form-control-placeholder" id="endDate" asp-for="endDate">End Date</label>
+                                            <span class="fa fa-calendar" id="fa-2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="reason" class="control-label">Reason</label>
+                                <input asp-for="reason" class="form-control" id="reason" />
+                                <span asp-validation-for="reason" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeStatusId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeStatusId" class="form-select">
+                                    <option value="1">Pending</option>
+                                    <option value="2">Approved</option>
+                                    <option value="3">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Edit" class="btn btn-primary" onclick="Update()" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="detailFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="fullName" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeId" class="form-select" disabled>
+                                    <option selected>Choose...</option>
+                                    <option value="1">Cuti Sakit</option>
+                                    <option value="2">Cuti Hamil</option>
+                                    <option value="3">Cuti Penting</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="requestedDay" class="control-label">Requested Day</label>
+                                <input asp-for="requestedDay" class="form-control" id="requestedDay" disabled />
+                                <span asp-validation-for="requestedDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="flex-row d-flex justify-content-center">
+                                    <div class="col-lg-6 col-11 px-1">
+                                        <div class="input-group input-daterange">
+                                            <input type="text" id="startDate" class="form-control text-left mr-2" disabled>
+                                            <label class="ml-3 form-control-placeholder" id="startDate" asp-for="startDate">Start Date</label>
+                                            <span class="fa fa-calendar" id="fa-1"></span>
+                                            <input type="text" id="endDate" class="form-control text-left ml-2" disabled>
+                                            <label class="ml-3 form-control-placeholder" id="endDate" asp-for="endDate">End Date</label>
+                                            <span class="fa fa-calendar" id="fa-2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="reason" class="control-label">Reason</label>
+                                <input asp-for="reason" class="form-control" id="reason" disabled />
+                                <span asp-validation-for="reason" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeaveTypeStatusId" class="form-label">Leave Type</label>
+                                <select id="LeaveTypeStatusId" class="form-select" disabled>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Approved</option>
+                                    <option value="3">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Apa Anda yakin akan menghapus data ini?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" onclick="Delete(id)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/leave/LeaveReq.js"></script>
+}

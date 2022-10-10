@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Account Page";
+    Layout = "_MainLayout";
+}
+
+<h1>Account Detail</h1>
+
+<h4>Account</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form action="/Dashboard/Account" method="post">
+            <div class="form-group">
+                <label name="Fullname" class="control-label">Fullname</label>
+                <input name="Fullname" class="form-control" id="fullName" disabled />
+            </div>
+            <div class="form-group">
+                <label name="Gender" class="control-label">Gender</label>
+                <input name="Gender" class="form-control" id="gender" disabled/>
+            </div>
+            <div class="form-group">
+                <label name="Email" class="control-label">Email</label>
+                <input name="Email" class="form-control" id="email" disabled/>
+            </div>
+            <div class="form-group">
+                <label name="phoneNumber" class="control-label">Phone Number</label>
+                <input name="phoneNumber" class="form-control" id="phoneNumber" disabled/>
+            </div>
+            <div class="form-group">
+                <label name="Department" class="control-label">Department</label>
+                <input name="Department" class="form-control" id="department" disabled />
+            </div>
+            <div class="text-center">
+                <a class="btn btn-primary btn-user btn-block" href="https://localhost:44323/Dashboard/ChangePass">Change Password</a>
+            </div>
+        </form>
+    </div>
+</div>

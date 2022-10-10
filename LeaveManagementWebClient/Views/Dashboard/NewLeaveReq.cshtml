@@ -12,31 +12,40 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
-        <form action="/SelfReport/Index" method="post">
+    <div class="col-md-8">
+        <form action="/Dashboard/NewLeaveReq" method="post">
             <div class="form-group">
-                <label name="EmployeeId" class="control-label">Employee Id</label>
-                <input name="EmployeeId" class="form-control" disabled />
+				<label for="leaveType" class="form-label">Leave Type</label>
+				<select id="leaveType" class="form-select">
+					<option selected>Choose...</option>
+					<option value="1">Cuti Sakit</option>
+					<option value="2">Cuti Hamil</option>
+                    <option value="3">Cuti Penting</option>
+			    </select>
+			</div>
+            <div class="flex-row d-flex justify-content-center">
+                <div class="col-lg-6 col-11 px-1">
+                    <div class="input-group input-daterange">
+                        <input type="text" id="start" class="form-control text-left mr-2">
+                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">Start Date</label>
+                        <span class="fa fa-calendar" id="fa-1"></span>
+                        <input type="text" id="end" class="form-control text-left ml-2">
+                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">End Date</label>
+                        <span class="fa fa-calendar" id="fa-2"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label name="Bulan" class="control-label">Bulan</label>
-                <input name="Bulan" class="form-control" />
+                <label name="reason" class="control-label">Reason</label>
+                <input name="reason" id="reason" class="form-control" />
             </div>
             <div class="form-group">
-                <label name="Cuti" class="control-label">Cuti</label>
-                <input name="Cuti" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label name="Libur" class="control-label">Libur</label>
-                <input name="Libur" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label name="Status" class="control-label">Status</label>
-                <input name="Status" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Request" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/Leave/NewLeaveRequest.js"></script>
+}

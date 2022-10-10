@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model LeaveManagementWebClient.Models.ViewModel.EmployeeViewModel
 @{
     ViewData["Title"] = "Employee Table Page";
     Layout = "_MainLayout";
@@ -9,22 +10,25 @@
 <h1>Employee</h1>
 
 <p>
-	<a data-bs-toggle="modal" data-bs-target="#newEmployeeModal">Create New</a>
+	<a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>
 </p>
 <table class="table" id="employeeTable">
 	<thead>
 		<tr>
 			<th>
-				Full Name
+				Fullname
+			</th>
+			<th>
+				Gender
 			</th>
 			<th>
 				Email
 			</th>
 			<th>
-				No. Telepon
+				Phone Number
 			</th>
 			<th>
-				Jabatan
+				Department
 			</th>
 			<th>
 				Action
@@ -35,43 +39,220 @@
 	</tbody>
 </table>
 
-<div class="modal" tabindex="-1" id="newEmployeeModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form class="row g-3">
-					<div class="col-md-6">
-						<label for="fullName" class="form-label">Nama Lengkap</label>
-						<input type="text" class="form-control" id="fullName">
-					</div>
-					<div class="col-md-6">
-						<label for="email" class="form-label">Email</label>
-						<input type="text" class="form-control" id="email">
-					</div>
-					<div class="col-md-6">
-						<label for="telpon" class="form-label">Nomor Telepon</label>
-						<input type="text" class="form-control" id="telpon">
-					</div>
-					<div class="col-md-6">
-						<label for="jabatan" class="form-label">Jabatan</label>
-						<select id="jabatan" class="form-select">
-							<option selected>Choose...</option>
-							<option value="2">Manager</option>
-							<option value="3">Staff</option>
-						</select>
-					</div>
-					<div class="col-12">
-						<button type="submit" class="btn btn-primary" onclick="Insert(event)">Daftar</button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+<!-- Modal Create-->
+<div class="modal fade" id="createFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new leave type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="firstname" class="control-label">First Name</label>
+                                    <input asp-for="firstname" class="form-control" id="firstname" />
+                                    <span asp-validation-for="firstname" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="lasttname" class="control-label">Last Name</label>
+                                    <input asp-for="lasttname" class="form-control" id="lastname" />
+                                    <span asp-validation-for="lasttname" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="genderTypeId" class="form-label">Gender</label>
+                                <select id="genderTypeId" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="email" class="control-label">Email</label>
+                                <input asp-for="email" class="form-control" id="email" type="email"/>
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="phoneNumber" class="control-label">Phone Number</label>
+                                <input asp-for="phoneNumber" class="form-control" id="phoneNumber" />
+                                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="departmentId" class="form-label">Department</label>
+                                <select id="departmentId" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Create" class="btn btn-primary" onclick="Insert(event)" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="firstname" class="control-label">First Name</label>
+                                    <input asp-for="firstname" class="form-control" id="firstname" />
+                                    <span asp-validation-for="firstname" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="lasttname" class="control-label">Last Name</label>
+                                    <input asp-for="lasttname" class="form-control" id="lastname" />
+                                    <span asp-validation-for="lasttname" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="genderTypeId" class="form-label">Gender</label>
+                                <select id="genderTypeId" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="email" class="control-label">Email</label>
+                                <input asp-for="email" class="form-control" id="email" type="email" />
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="phoneNumber" class="control-label">Phone Number</label>
+                                <input asp-for="phoneNumber" class="form-control" id="phoneNumber" />
+                                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="departmentId" class="form-label">Department</label>
+                                <select id="departmentId" class="form-select">
+                                    <option >Choose...</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Edit" class="btn btn-primary" onclick="Update()" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="detailFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="firstname" class="control-label">First Name</label>
+                                    <input asp-for="firstname" class="form-control" id="firstname" disabled/>
+                                    <span asp-validation-for="firstname" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="lasttname" class="control-label">Last Name</label>
+                                    <input asp-for="lasttname" class="form-control" id="lastname" disabled/>
+                                    <span asp-validation-for="lasttname" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="genderTypeId" class="form-label">Gender</label>
+                                <select id="genderTypeId" class="form-select" disabled>
+                                    <option selected>Choose...</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="email" class="control-label">Email</label>
+                                <input asp-for="email" class="form-control" id="email" type="email" disabled/>
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="phoneNumber" class="control-label">Phone Number</label>
+                                <input asp-for="phoneNumber" class="form-control" id="phoneNumber" disabled/>
+                                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="departmentId" class="form-label">Department</label>
+                                <select id="departmentId" class="form-select" disabled>
+                                    <option >Choose...</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Apa Anda yakin akan menghapus data ini?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" onclick="Delete(id)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/leave/EmployeeTab.js"></script>
+}

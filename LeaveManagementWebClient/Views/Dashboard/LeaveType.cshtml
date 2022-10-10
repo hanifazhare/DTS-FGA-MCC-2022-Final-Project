@@ -1,42 +1,116 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model LeaveManagementWebClient.Models.LeaveType
 @{
     ViewData["Title"] = "Leave Type Page";
     Layout = "_MainLayout";
 }
 
-<h1>New Leave Request</h1>
+<h1>Leave Request</h1>
 
-<h4>Leave Request</h4>
-<hr />
+<p>
+    <a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>
+</p>
+<table class="table" id="employeeTable">
+	<thead>
+		<tr>
+			<th>
+				Leave Type
+			</th>
+			<th>
+				Action
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
 
-<div class="row">
-    <div class="col-md-4">
-        <form action="/SelfReport/Index" method="post">
-            <div class="form-group">
-                <label name="EmployeeId" class="control-label">Employee Id</label>
-                <input name="EmployeeId" class="form-control" disabled />
+<!-- Modal Create-->
+<div class="modal fade" id="createFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new leave type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label name="Bulan" class="control-label">Bulan</label>
-                <input name="Bulan" class="form-control" />
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="name" class="control-label">Leave Type</label>
+                                <input asp-for="name" class="form-control" id="name" />
+                                <span asp-validation-for="name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Create" class="btn btn-primary" onclick="Insert(event)" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label name="Cuti" class="control-label">Cuti</label>
-                <input name="Cuti" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label name="Libur" class="control-label">Libur</label>
-                <input name="Libur" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label name="Status" class="control-label">Status</label>
-                <input name="Status" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="name" class="control-label">Leave Type</label>
+                                <input asp-for="name" class="form-control" id="name" />
+                                <span asp-validation-for="name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Edit" class="btn btn-primary" onclick="Update()" data-dismiss="modal" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Apa Anda yakin akan menghapus data ini?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" onclick="Delete(id)" >Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/products/index.js"></script>
+}
