@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagementWebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20221009150714_RefactorAllModels")]
-    partial class RefactorAllModels
+    [Migration("20221010111214_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

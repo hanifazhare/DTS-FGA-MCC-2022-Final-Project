@@ -57,6 +57,17 @@ namespace LeaveManagementWebAPI
                 });
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                    });
+            });
+
             #region Dependency Injection
 
             services.AddScoped<AccountRepository>();
@@ -92,6 +103,8 @@ namespace LeaveManagementWebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("AllowAllOrigins");
 
             app.UseEndpoints(endpoints =>
             {

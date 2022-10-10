@@ -84,6 +84,7 @@ namespace LeaveManagementWebAPI.Migrations
                     email = table.Column<string>(type: "varchar(255)", nullable: false),
                     phoneNumber = table.Column<string>(type: "varchar(15)", nullable: false),
                     departmentId = table.Column<int>(nullable: false),
+                    managerId = table.Column<int>(nullable: true),
                     createdAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
                     updatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()")
                 },
@@ -102,6 +103,12 @@ namespace LeaveManagementWebAPI.Migrations
                         principalTable: "GenderTypes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Employees_Employees_managerId",
+                        column: x => x.managerId,
+                        principalTable: "Employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,6 +188,11 @@ namespace LeaveManagementWebAPI.Migrations
                 name: "IX_Employees_genderTypeId",
                 table: "Employees",
                 column: "genderTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_managerId",
+                table: "Employees",
+                column: "managerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_email_phoneNumber",

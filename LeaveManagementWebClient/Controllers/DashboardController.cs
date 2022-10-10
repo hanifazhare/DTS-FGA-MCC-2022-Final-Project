@@ -77,6 +77,7 @@ namespace LeaveManagementWebClient.Controllers
                 return View();
         }
 
+        [Route("Dashboard/Account/ChangePass")]
         public IActionResult ChangePass()
         {
             return View();

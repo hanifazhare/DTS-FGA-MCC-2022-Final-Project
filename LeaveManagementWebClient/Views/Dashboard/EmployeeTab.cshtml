@@ -10,7 +10,10 @@
 <h1>Employee</h1>
 
 <p>
-	<a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>
+	@*<a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>*@
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createFormModal">
+        Create New
+    </button>
 </p>
 <table class="table" id="employeeTable">
 	<thead>
@@ -44,7 +47,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create new leave type</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create new data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -88,8 +91,8 @@
                                 <label asp-for="departmentId" class="form-label">Department</label>
                                 <select id="departmentId" class="form-select">
                                     <option selected>Choose...</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
+                                    <option value="1">IT</option>
+                                    <option value="2">HRD</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -153,8 +156,8 @@
                                 <label asp-for="departmentId" class="form-label">Department</label>
                                 <select id="departmentId" class="form-select">
                                     <option >Choose...</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
+                                    <option value="1">IT</option>
+                                    <option value="2">HRD</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -218,8 +221,8 @@
                                 <label asp-for="departmentId" class="form-label">Department</label>
                                 <select id="departmentId" class="form-select" disabled>
                                     <option >Choose...</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
+                                    <option value="1">IT</option>
+                                    <option value="2">HRD</option>
                                 </select>
                             </div>
                             <div class="form-group">
