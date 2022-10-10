@@ -1,16 +1,15 @@
 ﻿using LeaveManagementWebAPI.Models.ViewModels;
-using LeaveManagementWebAPI.Models;
 
 namespace LeaveManagementWebAPI.Repositories.Interfaces
 {
     public interface IAccountRepository
     {
-        ResponseLoginViewModel login(LoginViewModel loginViewModel);
+        ResponseLoginViewModel Login(LoginViewModel loginViewModel);
 
-        int register(RegisterViewModel registerViewModel);
+        int Register(RegisterViewModel registerViewModel);
 
-        int changePassword(ChangePasswordViewModel changePasswordViewModel);
+        int ChangePassword(ChangePasswordViewModel changePasswordViewModel);
 
-        int forgotPassword(LoginViewModel loginViewModel);
+        int ForgotPassword(LoginViewModel loginViewModel);
     }
 }

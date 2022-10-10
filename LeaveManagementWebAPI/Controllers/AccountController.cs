@@ -19,7 +19,7 @@ namespace LeaveManagementWebAPI.Controllers
         [HttpPost]
         public ActionResult LoginService(LoginViewModel loginViewModel)
         {
-            var data = _accountRepository.login(loginViewModel);
+            var data = _accountRepository.Login(loginViewModel);
             if (data != null)
                 return Ok(new { statusCode = 200, data = data });
 
@@ -30,7 +30,7 @@ namespace LeaveManagementWebAPI.Controllers
         [HttpPost]
         public ActionResult RegisterService(RegisterViewModel registerViewModel)
         {
-            var data = _accountRepository.register(registerViewModel);
+            var data = _accountRepository.Register(registerViewModel);
             if (data == 1)
                 return Ok(new { statusCode = 200, message = "Success register user" });
 
@@ -41,7 +41,7 @@ namespace LeaveManagementWebAPI.Controllers
         [HttpPost]
         public ActionResult ChangePasswordService(ChangePasswordViewModel changePasswordViewModel)
         {
-            var data = _accountRepository.changePassword(changePasswordViewModel);
+            var data = _accountRepository.ChangePassword(changePasswordViewModel);
             if (data == 1)
                 return Ok(new { statusCode = 200, message = "Success change user password" });
 
@@ -52,7 +52,7 @@ namespace LeaveManagementWebAPI.Controllers
         [HttpPost]
         public ActionResult ForgotPasswordService(LoginViewModel loginViewModel)
         {
-            var data = _accountRepository.forgotPassword(loginViewModel);
+            var data = _accountRepository.ForgotPassword(loginViewModel);
             if (data == 1)
                 return Ok(new { statusCode = 200, message = "Success change user password" });
 

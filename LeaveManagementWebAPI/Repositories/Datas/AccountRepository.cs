@@ -31,7 +31,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             return BCrypt.Net.BCrypt.Verify(password, correctHash);
         }
 
-        public ResponseLoginViewModel login(LoginViewModel loginViewModel)
+        public ResponseLoginViewModel Login(LoginViewModel loginViewModel)
         {
             bool isPasswordCorrect = false;
 
@@ -63,7 +63,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             return null;
         }
 
-        public int register(RegisterViewModel registerViewModel)
+        public int Register(RegisterViewModel registerViewModel)
         {
             int result = 0;
 
@@ -92,7 +92,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             return result;
         }
 
-        public int changePassword(ChangePasswordViewModel changePasswordViewModel)
+        public int ChangePassword(ChangePasswordViewModel changePasswordViewModel)
         {
             bool isPasswordCorrect = false;
             int result = 0;
@@ -121,7 +121,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             return result;
         }
 
-        public int forgotPassword(LoginViewModel loginViewModel)
+        public int ForgotPassword(LoginViewModel loginViewModel)
         {
             int result = 0;
 
