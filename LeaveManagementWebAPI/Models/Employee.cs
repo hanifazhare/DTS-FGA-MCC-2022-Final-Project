@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using LeaveManagementWebAPI.Models.ViewModels;
 
 namespace LeaveManagementWebAPI.Models
 {

@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace LeaveManagementWebAPI.Models
+namespace LeaveManagementWebAPI.Models.ViewModels
 {
-    public class LeaveStatusType
+    public class LeaveTypeViewModel
     {
-        [Key]
         public int id { get; set; }
-
-        [Required]
-        [Column(TypeName = "varchar(255)")]
         public string name { get; set; }
     }
 }
