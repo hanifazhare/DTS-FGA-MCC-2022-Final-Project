@@ -66,7 +66,6 @@ namespace LeaveManagementWebAPI
             services.AddScoped<LeaveRequestRepository>();
             services.AddScoped<LeaveStatusTypeRepository>();
             services.AddScoped<LeaveTypeRepository>();
-            services.AddScoped<UserRepository>();
             services.AddScoped<UserRoleTypeRepository>();
 
             #endregion Dependency Injection
