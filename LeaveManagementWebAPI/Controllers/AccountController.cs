@@ -15,6 +15,17 @@ namespace LeaveManagementWebAPI.Controllers
             _accountRepository = accountRepository;
         }
 
+        [Route("user/{id}")]
+        [HttpPost]
+        public ActionResult GetDataService(int id)
+        {
+            var data = _accountRepository.GetData(id);
+            if (data == null)
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
+        }
+
         [Route("login")]
         [HttpPost]
         public ActionResult LoginService(LoginViewModel loginViewModel)

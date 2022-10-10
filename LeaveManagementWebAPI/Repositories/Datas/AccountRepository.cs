@@ -31,6 +31,14 @@ namespace LeaveManagementWebAPI.Repositories.Datas
             return BCrypt.Net.BCrypt.Verify(password, correctHash);
         }
 
+        public User GetData(int id)
+        {
+            return _dbContext.Users
+                .Include(model => model.employee)
+                .Include(model => model.userRoleType)
+                .FirstOrDefault(model => model.id == id);
+        }
+
         public ResponseLoginViewModel Login(LoginViewModel loginViewModel)
         {
             bool isPasswordCorrect = false;
