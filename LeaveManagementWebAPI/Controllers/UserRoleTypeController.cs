@@ -1,5 +1,6 @@
 ﻿using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Repositories.Datas;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace LeaveManagementWebAPI.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     public class UserRoleTypeController : ControllerBase
     {

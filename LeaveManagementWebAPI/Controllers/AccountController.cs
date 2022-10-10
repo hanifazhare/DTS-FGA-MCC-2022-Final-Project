@@ -1,10 +1,12 @@
 ﻿using LeaveManagementWebAPI.Models.ViewModels;
 using LeaveManagementWebAPI.Repositories.Datas;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeaveManagementWebAPI.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     public class AccountController : ControllerBase
     {
