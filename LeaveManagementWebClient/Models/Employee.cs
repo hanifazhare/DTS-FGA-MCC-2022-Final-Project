@@ -32,11 +32,11 @@ namespace LeaveManagementWebClient.Models
         public DepartmentType departmentType { get; set; }
 
         [ForeignKey("departmentType")]
-        public int departmentId { get; set; }
+        public int departmentTypeId { get; set; }
 
-        public Employee employee { get; set; }
+        public Employee manager { get; set; }
 
-        [ForeignKey("employee")]
+        [ForeignKey("manager")]
         public int? managerId { get; set; }
 
         [Required]

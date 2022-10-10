@@ -39,7 +39,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 data.genderTypeId = employeeViewModel.genderTypeId;
                 data.email = employeeViewModel.email;
                 data.phoneNumber = employeeViewModel.phoneNumber;
-                data.departmentId = employeeViewModel.departmentId;
+                data.departmentTypeId = employeeViewModel.departmentTypeId;
                 data.managerId = employeeViewModel.managerId;
                 data.updatedAt = DateTime.Now;
 
@@ -62,7 +62,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 genderTypeId = employeeViewModel.genderTypeId,
                 email = employeeViewModel.email,
                 phoneNumber = employeeViewModel.phoneNumber,
-                departmentId = employeeViewModel.departmentId,
+                departmentTypeId = employeeViewModel.departmentTypeId,
                 managerId = employeeViewModel.managerId,
                 createdAt = DateTime.Now,
                 updatedAt = DateTime.Now

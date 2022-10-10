@@ -14,7 +14,7 @@
         
         public string phoneNumber { get; set; }
 
-        public int departmentId { get; set; }
+        public int departmentTypeId { get; set; }
 
         public int managerId { get; set; }
     }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagementWebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20221009150714_RefactorAllModels")]
-    partial class RefactorAllModels
+    [Migration("20221010145929_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace LeaveManagementWebAPI.Migrations
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<int>("departmentId")
+                    b.Property<int>("departmentTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("email")
@@ -80,7 +80,7 @@ namespace LeaveManagementWebAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("departmentId");
+                    b.HasIndex("departmentTypeId");
 
                     b.HasIndex("genderTypeId");
 
@@ -250,7 +250,7 @@ namespace LeaveManagementWebAPI.Migrations
                 {
                     b.HasOne("LeaveManagementWebAPI.Models.DepartmentType", "departmentType")
                         .WithMany()
-                        .HasForeignKey("departmentId")
+                        .HasForeignKey("departmentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -260,7 +260,7 @@ namespace LeaveManagementWebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LeaveManagementWebAPI.Models.Employee", "employee")
+                    b.HasOne("LeaveManagementWebAPI.Models.Employee", "manager")
                         .WithMany()
                         .HasForeignKey("managerId");
                 });
