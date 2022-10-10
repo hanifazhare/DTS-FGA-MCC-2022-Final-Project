@@ -52,6 +52,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                         firstName = data.employee.firstName,
                         lastName = data.employee.lastName,
                         email = data.employee.email,
+                        departmentTypeId = data.employee.departmentTypeId,
                         role = data.userRoleType.name
                     };
                 }
