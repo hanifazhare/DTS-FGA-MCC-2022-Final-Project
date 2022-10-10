@@ -11,58 +11,21 @@ namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class UserRoleTypeRepository : IUserRoleTypeRepository
     {
-        DBContext dBContext;
+        private readonly DBContext _dbContext;
 
-        public UserRoleTypeRepository(DBContext dBContext)
+        public UserRoleTypeRepository(DBContext dbContext)
         {
-            this.dBContext = dBContext;
-        }
-        public int Delete(int id)
-        {
-            var data = dBContext.UserRoleTypes.Find(id);
-            dBContext.UserRoleTypes.Remove(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            _dbContext = dbContext;
         }
 
-        public List<UserRoleTypeViewModel> Get()
+        public List<UserRoleType> GetData()
         {
-            var data = dBContext.UserRoleTypes.Select(x => new UserRoleTypeViewModel
-            {
-                id = x.id,
-                name = x.name
-            }).ToList();
-
-            return data;
+            return _dbContext.UserRoleTypes.ToList();
         }
 
-        public UserRoleTypeViewModel Get(int id)
+        public UserRoleType GetData(int id)
         {
-            var data = dBContext.UserRoleTypes.Where(x => x.id == id).Select(x => new UserRoleTypeViewModel
-            {
-                id = x.id,
-                name = x.name,
-            }).FirstOrDefault();
-            return data;
-        }
-
-        public int Post(UserRoleTypeViewModel userRole)
-        {
-            dBContext.UserRoleTypes.Add(new UserRoleType
-            {
-                name = userRole.name
-            });
-            var result = dBContext.SaveChanges();
-            return result;
-        }
-
-        public int Put(int id, UserRoleTypeViewModel userRole)
-        {
-            var data = dBContext.UserRoleTypes.Find(id);
-            data.name = userRole.name;
-            dBContext.UserRoleTypes.Update(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            return _dbContext.UserRoleTypes.Find(id);
         }
     }
 }

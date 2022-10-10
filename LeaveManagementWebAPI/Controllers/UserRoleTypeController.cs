@@ -13,57 +13,32 @@ namespace LeaveManagementWebAPI.Controllers
     [ApiController]
     public class UserRoleTypeController : ControllerBase
     {
-        UserRoleTypeRepository _repository;
+        private readonly UserRoleTypeRepository _userRoleTypeRepository;
 
-        public UserRoleTypeController(UserRoleTypeRepository repository)
+        public UserRoleTypeController(UserRoleTypeRepository userRoleTypeRepository)
         {
-            this._repository = repository;
+            _userRoleTypeRepository = userRoleTypeRepository;
         }
-        // READ
+
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetDataService()
         {
-            var data = _repository.Get();
+            var data = _userRoleTypeRepository.GetData();
             if (data.Count == 0)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
 
-        //READ BY ID
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetDataService(int id)
         {
-            var data = _repository.Get(id);
+            var data = _userRoleTypeRepository.GetData(id);
             if (data == null)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
-        }
-        // UPDATE 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, UserRoleTypeViewModel UserRole)
-        {
-            var result = _repository.Put(id, UserRole);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil mengupdate data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal mengupdate data" });
-        }
-        // CREATE
-        [HttpPost]
-        public IActionResult Post(UserRoleTypeViewModel UserRole)
-        {
-            var result = _repository.Post(UserRole);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menambah data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menambah data" });
-        }
-        // DELETE
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var result = _repository.Delete(id);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menghapus data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menghapus data" });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
     }
 }
