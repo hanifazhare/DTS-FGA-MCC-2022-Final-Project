@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LeaveManagementWebAPI.Models.ViewModels;
+﻿using System.Collections.Generic;
+using LeaveManagementWebAPI.Models;
 
 namespace LeaveManagementWebAPI.Repositories.Interfaces
 {
     interface ILeaveStatusTypeRepository
     {
-        List<LeaveStatusTypeViewModel> Get();
-        LeaveStatusTypeViewModel Get(int id);
-        int Post(LeaveStatusTypeViewModel leaveStatus);
-        int Put(int id, LeaveStatusTypeViewModel leaveStatus);
-        int Delete(int id);
+        List<LeaveStatusType> GetData();
+
+        LeaveStatusType GetData(int id);
     }
 }

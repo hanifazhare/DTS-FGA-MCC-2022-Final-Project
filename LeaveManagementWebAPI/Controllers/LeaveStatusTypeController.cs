@@ -17,57 +17,32 @@ namespace LeaveManagementWebAPI.Controllers
     [ApiController]
     public class LeaveStatusTypeController : ControllerBase
     {
-        LeaveStatusTypeRepository _repository;
+        private readonly LeaveStatusTypeRepository _leaveStatusTypeRepository;
 
-        public LeaveStatusTypeController(LeaveStatusTypeRepository repository)
+        public LeaveStatusTypeController(LeaveStatusTypeRepository leaveStatusTypeRepository)
         {
-            this._repository = repository;
+            _leaveStatusTypeRepository = leaveStatusTypeRepository;
         }
-        // READ
+
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetDataService()
         {
-            var data = _repository.Get();
+            var data = _leaveStatusTypeRepository.GetData();
             if (data.Count == 0)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
 
-        //READ BY ID
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetDataService(int id)
         {
-            var data = _repository.Get(id);
+            var data = _leaveStatusTypeRepository.GetData(id);
             if (data == null)
-                return Ok(new { message = "gagal mengambil data", StatusCode = 200, data = "null" });
-            return Ok(new { message = "berhasil mengambil data", StatusCode = 200, data = data });
-        }
-        // UPDATE 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, LeaveStatusTypeViewModel leaveStatus)
-        {
-            var result = _repository.Put(id, leaveStatus);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil mengupdate data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal mengupdate data" });
-        }
-        // CREATE
-        [HttpPost]
-        public IActionResult Post(LeaveStatusTypeViewModel leaveStatus)
-        {
-            var result = _repository.Post(leaveStatus);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menambah data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menambah data" });
-        }
-        // DELETE
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var result = _repository.Delete(id);
-            if (result > 0)
-                return Ok(new { statusCode = 200, message = "berhasil menghapus data" });
-            return BadRequest(new { StatusCode = 400, message = "gagal menghapus data" });
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
         }
     }
 }

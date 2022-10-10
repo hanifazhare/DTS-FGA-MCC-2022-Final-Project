@@ -12,58 +12,21 @@ namespace LeaveManagementWebAPI.Repositories.Datas
 {
     public class LeaveStatusTypeRepository : ILeaveStatusTypeRepository
     {
-        DBContext dBContext;
+        private readonly DBContext _dbContext;
 
-        public LeaveStatusTypeRepository(DBContext dBContext)
+        public LeaveStatusTypeRepository(DBContext dbContext)
         {
-            this.dBContext = dBContext;
-        }
-        public int Delete(int id)
-        {
-            var data = dBContext.LeaveStatusTypes.Find(id);
-            dBContext.LeaveStatusTypes.Remove(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            _dbContext = dbContext;
         }
 
-        public List<LeaveStatusTypeViewModel> Get()
+        public List<LeaveStatusType> GetData()
         {
-            var data = dBContext.LeaveStatusTypes.Select(x => new LeaveStatusTypeViewModel
-            {
-                id = x.id,
-                name = x.name
-            }).ToList();
-
-            return data;
+            return _dbContext.LeaveStatusTypes.ToList();
         }
 
-        public LeaveStatusTypeViewModel Get(int id)
+        public LeaveStatusType GetData(int id)
         {
-            var data = dBContext.LeaveStatusTypes.Where(x => x.id == id).Select(x => new LeaveStatusTypeViewModel
-            {
-                id = x.id,
-                name = x.name,
-            }).FirstOrDefault();
-            return data;
-        }
-
-        public int Post(LeaveStatusTypeViewModel leaveStatus)
-        {
-            dBContext.LeaveStatusTypes.Add(new LeaveStatusType
-            {
-                name = leaveStatus.name
-            });
-            var result = dBContext.SaveChanges();
-            return result;
-        }
-
-        public int Put(int id, LeaveStatusTypeViewModel leaveStatus)
-        {
-            var data = dBContext.LeaveStatusTypes.Find(id);
-            data.name = leaveStatus.name;
-            dBContext.LeaveStatusTypes.Update(data);
-            var result = dBContext.SaveChanges();
-            return result;
+            return _dbContext.LeaveStatusTypes.Find(id);
         }
     }
 }
