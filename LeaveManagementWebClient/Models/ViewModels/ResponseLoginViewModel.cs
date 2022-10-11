@@ -2,10 +2,16 @@
 {
     public class ResponseLoginViewModel
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string FullName { get; set; }
-        public string Role { get; set; }
-        public int JabatanId { get; set; }
+        public int id { get; set; }
+
+        public string firstName { get; set; }
+
+        public string lastName { get; set; }
+
+        public string email { get; set; }
+
+        public int departmentTypeId { get; set; }
+
+        public string role { get; set; }
     }
 }

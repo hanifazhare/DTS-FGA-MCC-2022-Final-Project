@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace LeaveManagementWebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowAllOrigins")]
     [ApiController]
     [EnableCors("AllowAllOrigins")]
 

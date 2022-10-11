@@ -37,14 +37,17 @@
                 render: function (data, type, meta) {
 
                     let editBtn = `<button type="button" onclick="GetById(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editFormModal">Edit</button>`;
-                    let detailsBtn = `<a href='/products/details/${data}' class="btn btn-default btn-sm">Details</a>`;
-                    let deleteBtn = `<a href='/products/delete/${data}' class="btn btn-default btn-sm">Delete</a>`;
+                    let detailsBtn = `<a href='/Employee/details/${data}' class="btn btn-default btn-sm">Details</a>`;
+                    let deleteBtn = `<a href='/Employee/delete/${data}' class="btn btn-default btn-sm">Delete</a>`;
                     return `${editBtn} | ${detailsBtn} | ${deleteBtn}`;
                 }
             }
         ]
     });
 });
+
+const userId = '@Session["UserId"]';
+const managerId = '@Session["ManagerId"]';
 
 function Insert(event) {
     event.preventDefault();
@@ -56,7 +59,8 @@ function Insert(event) {
     obj.genderTypeId = parseInt($("#genderTypeId").val());
     obj.email = $("#email").val();
     obj.phoneNumber = $("#phoneNumber").val();
-    obj.departmentId = parseInt($("#departmentId").val());
+    obj.departmentId = managerId;
+    obj.managerId = userId;
     //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
     $.ajax({
         contentType: "application/json",
@@ -69,6 +73,53 @@ function Insert(event) {
         $('#employeeTable').DataTable().ajax.reload();
 
     }).fail((error) => {
+        alert("Data gagal ditambahkan");
         console.log(error);
     })
 };
+
+function GetById(data) {
+    $.ajax({
+        url: `https://localhost:44371/api/Employee/${data}`,
+        type: "GET",
+    })
+        .done((result) => {
+            //ngebuat kolom buat id tapi invisible
+            $("#firstname")[0].value = result.data.firstName;
+            $("#lastname")[0].value = result.data.lastName;
+            $("#genderTypeId")[0].value = result.data.genderTypeId;
+            $("#email")[0].value = result.data.email;
+            $("#phoneNumber")[0].value = result.data.phoneNumber;
+            $("#departmentId")[0].value = departmentId;
+        })
+        .fail((error) => {
+            console.log(error);
+        });
+}
+
+function Update() {
+    event.preventDefault();
+    var obj = new Object();
+    obj.firstName = $("#firstname").val();
+    obj.lastName = $("#lastname").val();
+    obj.genderTypeId = parseInt($("#genderTypeId").val());
+    obj.email = $("#email").val();
+    obj.phoneNumber = $("#phoneNumber").val();
+    obj.departmentId = managerId;
+    obj.managerId = userId;
+
+    $.ajax({
+        contentType: "application/json",
+        url: `https://localhost:44371/api/Employee/${obj.id}`,
+        type: "PUT",
+        data: JSON.stringify(obj) //jika terkena 415 unsupported media type (tambahkan headertype Json & JSON.Stringify();)
+    }).done((result) => {
+        //buat alert pemberitahuan jika success
+        alert("Data berhasil diubah!");
+        $('#employeeTable').DataTable().ajax.reload();
+
+    }).fail((error) => {
+        alert("Data gagal diubah!");
+        console.log(error);
+    })
+}

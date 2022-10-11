@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LeaveManagementWebAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,11 +83,7 @@ namespace LeaveManagementWebAPI.Migrations
                     genderTypeId = table.Column<int>(nullable: false),
                     email = table.Column<string>(type: "varchar(255)", nullable: false),
                     phoneNumber = table.Column<string>(type: "varchar(15)", nullable: false),
-<<<<<<<< HEAD:LeaveManagementWebAPI/Migrations/20221010145929_Initial.cs
                     departmentTypeId = table.Column<int>(nullable: false),
-========
-                    departmentId = table.Column<int>(nullable: false),
->>>>>>>> fbc37ee (Added employee datatable.):LeaveManagementWebAPI/Migrations/20221010111214_Initial.cs
                     managerId = table.Column<int>(nullable: true),
                     createdAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
                     updatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()")

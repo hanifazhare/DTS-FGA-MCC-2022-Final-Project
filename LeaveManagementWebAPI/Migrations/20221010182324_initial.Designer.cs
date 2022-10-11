@@ -10,12 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveManagementWebAPI.Migrations
 {
     [DbContext(typeof(DBContext))]
-<<<<<<<< HEAD:LeaveManagementWebAPI/Migrations/20221010145929_Initial.Designer.cs
-    [Migration("20221010145929_Initial")]
-========
-    [Migration("20221010111214_Initial")]
->>>>>>>> fbc37ee (Added employee datatable.):LeaveManagementWebAPI/Migrations/20221010111214_Initial.Designer.cs
-    partial class Initial
+    [Migration("20221010182324_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

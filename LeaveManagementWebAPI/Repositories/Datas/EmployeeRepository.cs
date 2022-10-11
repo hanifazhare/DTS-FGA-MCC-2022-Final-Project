@@ -22,7 +22,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
         {
             return _dbContext.Employees
                 .Include(model => model.genderType)
-                .Include(model => model.departmentTypeId)
+                .Include(model => model.departmentType)
                 .ToList();
         }
 
@@ -30,7 +30,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
         {
             return _dbContext.Employees
                 .Include(model => model.genderType)
-                .Include(model => model.departmentTypeId)
+                .Include(model => model.departmentType)
                 .FirstOrDefault(model => model.id == id);
         }
 

@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Cors;
 namespace LeaveManagementWebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowAllOrigins")]
     [ApiController]
     [EnableCors("AllowAllOrigins")]
 

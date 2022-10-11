@@ -18,18 +18,22 @@ namespace LeaveManagementWebClient.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel login)
+        public async Task<IActionResult> LoginAsync(LoginViewModel login)
         {
-            var emailHere = login.Email;
-            var passHere = login.Password;
-            if (emailHere.Equals("admin@email.com") && passHere.Equals("admin"))
+            string address = "https://localhost:5001/api/Account/Login";
+            HttpClient = new HttpClient
             {
-                HttpContext.Session.SetString("Role", "Manager");
-                return RedirectToAction("Index", "Dashboard");
+                BaseAddress = new Uri(address)
+            };
 
-            } else if (emailHere.Equals("admin2@email.com") && passHere.Equals("admin2"))
+            StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+            var result = HttpClient.PostAsync(address, content).Result;
+            if (result.IsSuccessStatusCode)
             {
-                HttpContext.Session.SetString("Role", "Karyawan");
+                var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
+                HttpContext.Session.SetString("Role", data.Data.role);
+                HttpContext.Session.SetString("UserId", Convert.ToString(data.Data.id) );
+                HttpContext.Session.SetString("DepartmentId", Convert.ToString(data.Data.departmentTypeId));
                 return RedirectToAction("Index", "Dashboard");
             }
             return View();
