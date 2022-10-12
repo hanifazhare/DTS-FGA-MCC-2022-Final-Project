@@ -20,7 +20,7 @@ namespace LeaveManagementWebClient.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel login)
         {
-            string address = "https://localhost:5001/api/Account/Login";
+            string address = "https://localhost:44371/api/Account/login";
             HttpClient = new HttpClient
             {
                 BaseAddress = new Uri(address)
@@ -47,7 +47,7 @@ namespace LeaveManagementWebClient.Controllers
         [HttpPost]
         public async Task<IActionResult> Registrasi(AccountViewModel accountViewModel)
         {
-            string address = "https://localhost:5001/api/Account/Register";
+            string address = "https://localhost:44371/api/Account/register";
             HttpClient = new HttpClient
             {
                 BaseAddress = new Uri(address)
@@ -58,8 +58,7 @@ namespace LeaveManagementWebClient.Controllers
             if (result.IsSuccessStatusCode)
             {
                 var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
-                HttpContext.Session.SetString("Role", "Unauthorized");
-                return RedirectToAction("Login", "AccountMVC");
+                return RedirectToAction("Login", "Account");
             }
             return View();
         }
@@ -70,21 +69,20 @@ namespace LeaveManagementWebClient.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ForgotPass(AccountViewModel accountViewModel)
+        public async Task<IActionResult> ForgotPass(ForgotPassViewModel forgotPassViewModel)
         {
-            string address = "https://localhost:5001/api/Account/forgotPass";
+            string address = "https://localhost:44371/api/Account/forgot-password";
             HttpClient = new HttpClient
             {
                 BaseAddress = new Uri(address)
             };
 
-            StringContent content = new StringContent(JsonConvert.SerializeObject(accountViewModel), Encoding.UTF8, "application/json");
+            StringContent content = new StringContent(JsonConvert.SerializeObject(forgotPassViewModel), Encoding.UTF8, "application/json");
             var result = HttpClient.PostAsync(address, content).Result;
             if (result.IsSuccessStatusCode)
             {
                 var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
-                HttpContext.Session.SetString("Role", "Unauthorized");
-                return RedirectToAction("Login", "AccountMVC");
+                return RedirectToAction("Login", "Account");
             }
             return View();
         }
@@ -94,10 +92,11 @@ namespace LeaveManagementWebClient.Controllers
             return View();
         }
 
+        [Route("Dashboard/Account/ChangePass")]
         [HttpPost]
         public async Task<IActionResult> ChangePass(ChangePasswordViewModel changePasswordViewModel)
         {
-            string address = "https://localhost:5001/api/Account/changePass";
+            string address = "https://localhost:44371/api/Account/change-password";
             HttpClient = new HttpClient
             {
                 BaseAddress = new Uri(address)
@@ -108,8 +107,7 @@ namespace LeaveManagementWebClient.Controllers
             if (result.IsSuccessStatusCode)
             {
                 var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
-                HttpContext.Session.SetString("Role", "Unauthorized");
-                return RedirectToAction("Login", "AccountMVC");
+                return RedirectToAction("Login", "Account");
             }
             return View();
         }

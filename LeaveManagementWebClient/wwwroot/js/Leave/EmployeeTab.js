@@ -37,7 +37,7 @@
                 render: function (data, type, meta) {
 
                     let editBtn = `<button type="button" onclick="GetById(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editFormModal">Edit</button>`;
-                    let detailsBtn = `<a href='/Employee/details/${data}' class="btn btn-default btn-sm">Details</a>`;
+                    let detailsBtn = `<button type="button" onclick="GetById(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editFormModal">Details</button>`;
                     let deleteBtn = `<a href='/Employee/delete/${data}' class="btn btn-default btn-sm">Delete</a>`;
                     return `${editBtn} | ${detailsBtn} | ${deleteBtn}`;
                 }
@@ -59,12 +59,12 @@ function Insert(event) {
     obj.genderTypeId = parseInt($("#genderTypeId").val());
     obj.email = $("#email").val();
     obj.phoneNumber = $("#phoneNumber").val();
-    obj.departmentId = managerId;
-    obj.managerId = userId;
+    obj.departmentTypeId = 2;
+    obj.managerId = 2;
     //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
     $.ajax({
         contentType: "application/json",
-        url: "https://localhost:44371/api/Employee/",
+        url: "https://localhost:44371/api/Employee/create",
         type: "POST",
         data: JSON.stringify(obj) //jika terkena 415 unsupported media type (tambahkan headertype Json & JSON.Stringify();)
     }).done((result) => {
@@ -84,13 +84,15 @@ function GetById(data) {
         type: "GET",
     })
         .done((result) => {
+            console.log(result);
             //ngebuat kolom buat id tapi invisible
             $("#firstname")[0].value = result.data.firstName;
             $("#lastname")[0].value = result.data.lastName;
             $("#genderTypeId")[0].value = result.data.genderTypeId;
             $("#email")[0].value = result.data.email;
             $("#phoneNumber")[0].value = result.data.phoneNumber;
-            $("#departmentId")[0].value = departmentId;
+            $("#departmentId")[0].value = result.data.departmentTypeId;
+            console.log(result);
         })
         .fail((error) => {
             console.log(error);
