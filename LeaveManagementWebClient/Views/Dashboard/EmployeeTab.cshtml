@@ -55,23 +55,23 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form class="user" action="/Dashboard/EmployeeTab" method="post">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="firstname" class="control-label">First Name</label>
-                                    <input asp-for="firstname" class="form-control" id="firstname" />
+                                    <input asp-for="firstname" class="form-control" id="firstname" name="firstname"/>
                                     <span asp-validation-for="firstname" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label asp-for="lasttname" class="control-label">Last Name</label>
-                                    <input asp-for="lasttname" class="form-control" id="lastname" />
+                                    <input asp-for="lasttname" class="form-control" id="lastname" name="lastname"/>
                                     <span asp-validation-for="lasttname" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label asp-for="genderTypeId" class="form-label">Gender</label>
-                                <select id="genderTypeId" class="form-select">
+                                <select id="genderTypeId" class="form-select" name="genderTypeId">
                                     <option selected>Choose...</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
@@ -79,21 +79,14 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="email" class="control-label">Email</label>
-                                <input asp-for="email" class="form-control" id="email" type="email"/>
+                                <input asp-for="email" class="form-control" id="email" type="email" name="email"/>
                                 <span asp-validation-for="email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="phoneNumber" class="control-label">Phone Number</label>
-                                <input asp-for="phoneNumber" class="form-control" id="phoneNumber" />
+                                <input asp-for="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"/>
                                 <span asp-validation-for="phoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="departmentId" class="form-label">Department</label>
-                                <select id="departmentId" class="form-select">
-                                    <option selected>Choose...</option>
-                                    <option value="1">IT</option>
-                                    <option value="2">HRD</option>
-                                </select>
+                            
                             </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
