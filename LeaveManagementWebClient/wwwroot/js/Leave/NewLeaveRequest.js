@@ -41,15 +41,18 @@ function getBusinessDateCount(startDate, endDate) {
     return Math.ceil(elapsed);
 }
 
+let startDate;
+let endDate;
+
 $("#endDate").on('change keyup paste', function () {
-    var start = $('#startDate').datepicker('getDate');
-    var end = $('#endDate').datepicker('getDate');
+    startDate = $('#startDate').datepicker('getDate');
+    endDate = $('#endDate').datepicker('getDate');
 
-    console.log(start);
-    console.log(end);
+    console.log(startDate);
+    console.log(endDate);
 
-    if (start < end) {
-        var days = (end - start) / 1000 / 60 / 60 / 24;
+    if (startDate < endDate) {
+        var days = (endDate - startDate) / 1000 / 60 / 60 / 24;
 
         var Weeks = Math.round(days) / 7;
 
@@ -62,3 +65,53 @@ $("#endDate").on('change keyup paste', function () {
         $("#requestedDays")[0].value = Math.round(puredays) + 1;
     }
 });
+
+const userId = parseInt($("#sessionUserId").val());
+
+function Insert(event) {
+    event.preventDefault();
+
+    console.log(startDate);
+    console.log(endDate);
+
+    const cvStartDate = new Date(startDate);
+    const cvEndDate = new Date(endDate);
+
+    // Add a day
+    cvStartDate.setDate(cvStartDate.getDate() + 1);
+    cvEndDate.setDate(cvEndDate.getDate() + 1);
+
+    console.log(cvStartDate);
+    console.log(cvEndDate);
+
+    var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+    //ini ngambil value dari tiap inputan di form nya
+    obj.id = 0;
+    obj.leaveTypeId = parseInt($("#leaveType").val());
+    obj.userId = parseInt(userId);
+    obj.requestedDays = parseInt($("#requestedDays").val());
+    obj.startDate = cvStartDate;
+    obj.endDate = cvEndDate;
+    obj.reason = $("#reason").val();
+    //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
+    $.ajax({
+        contentType: "application/json",
+        url: "https://localhost:44371/api/LeaveRequest/create",
+        type: "POST",
+        data: JSON.stringify(obj) //jika terkena 415 unsupported media type (tambahkan headertype Json & JSON.Stringify();)
+    }).done((result) => {
+        //buat alert pemberitahuan jika success
+        Swal.fire(
+            'Success!',
+            'Data has been added',
+            'success'
+        )
+    }).fail((error) => {
+        Swal.fire(
+            'Failed!',
+            'Data has not been added',
+            'error'
+        )
+        console.log(error);
+    })
+};
