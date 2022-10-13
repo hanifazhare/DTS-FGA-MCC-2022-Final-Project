@@ -57,7 +57,6 @@ namespace LeaveManagementWebClient.Controllers
             var result = HttpClient.PostAsync(address, content).Result;
             if (result.IsSuccessStatusCode)
             {
-                var data = JsonConvert.DeserializeObject<ResponseClientViewModel>(await result.Content.ReadAsStringAsync());
                 return RedirectToAction("Login", "Account");
             }
             return View();

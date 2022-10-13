@@ -15,7 +15,7 @@
 
                     let editBtn = `<button type="button" onclick="GetById(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editFormModal">Edit</button>`;
                     let detailsBtn = `<button type="button" onclick="GetByIdDetail(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#detailsModal">Detail</button>`;
-                    let deleteBtn = `<button type="button" onclick="GetByIdDelete(${data})" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>`;
+                    let deleteBtn = `<button type="button" onclick="DeleteFunction(${data})" class="btn btn-default btn-sm" >Delete</button>`;
                     return `${editBtn} | ${detailsBtn} | ${deleteBtn}`;
                 }
             }
@@ -39,11 +39,19 @@ function Insert(event) {
         data: JSON.stringify(obj) //jika terkena 415 unsupported media type (tambahkan headertype Json & JSON.Stringify();)
     }).done((result) => {
         //buat alert pemberitahuan jika success
-        alert("Data berhasil ditambah!");
+        Swal.fire(
+            'Success!',
+            'Data has been added',
+            'success'
+        )
         $('#leaveTypeTable').DataTable().ajax.reload();
 
     }).fail((error) => {
-        alert("Data gagal ditambahkan");
+        Swal.fire(
+            'Failed!',
+            'Data has not been added',
+            'error'
+        )
         console.log(error);
     })
 };
@@ -98,11 +106,19 @@ function Update() {
         data: JSON.stringify(obj) //jika terkena 415 unsupported media type (tambahkan headertype Json & JSON.Stringify();)
     }).done((result) => {
         //buat alert pemberitahuan jika success
-        alert("Data berhasil diubah!");
+        Swal.fire(
+            'Success!',
+            'Data has been changed',
+            'success'
+        )
         $('#leaveTypeTable').DataTable().ajax.reload();
 
     }).fail((error) => {
-        alert("Data gagal diubah!");
+        Swal.fire(
+            'Failed!',
+            'Data has not been changed',
+            'error'
+        )
         console.log(error);
     })
 }
@@ -113,9 +129,18 @@ function Delete(id) {
         type: 'DELETE',
     }).done((result) => {
         console.log(result);
-        alert("Data berhasil diubah!");
+        Swal.fire(
+            'Success!',
+            'Data has been deleted',
+            'success'
+        )
         $('#leaveTypeTable').DataTable().ajax.reload();
     }).fail((error) => {
+        Swal.fire(
+            'Failed!',
+            'Data has not been deleted',
+            'error'
+        )
         console.log(error);
     })
 }
@@ -183,4 +208,17 @@ function GetByIdDelete(data) {
         .fail((error) => {
             console.log(error);
         });
+}
+
+function DeleteFunction(data) {
+    Swal.fire({
+        title: 'Do you want to delete this data?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Delete(data)
+        } 
+    })
 }
