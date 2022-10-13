@@ -23,7 +23,7 @@
     });
 });
 
-const userId = '@Session["UserId"]';
+
 
 function Insert(event) {
     event.preventDefault();
@@ -67,7 +67,7 @@ function GetById(data) {
                             </div>
                             <div class="form-group">
                                 <label asp-for="name" class="control-label">Leave Type</label>
-                                <input asp-for="name" class="form-control" id="name" value="${result.data.name}"/>
+                                <input asp-for="name" class="form-control" id="nameIn" value="${result.data.name}"/>
                                 <span asp-validation-for="name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -85,10 +85,11 @@ function GetById(data) {
 function Update() {
     event.preventDefault();
     var obj = new Object();
-    obj.id = $("#id").val();
-    obj.name = $("#name").val();
+    obj.id = parseInt($("#id").val());
+    obj.name = String($("#nameIn").val());
      
     console.log(obj);
+    console.log($("#nameIn").val());
 
     $.ajax({
         contentType: "application/json",
