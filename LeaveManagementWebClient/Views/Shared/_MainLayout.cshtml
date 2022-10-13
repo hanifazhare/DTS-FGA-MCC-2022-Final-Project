@@ -40,6 +40,7 @@
     <body id="page-top">
 
         <input id="sessionUserId" value="@Convert.ToInt32(Context.Session.GetString("UserId"))" hidden />
+        <input id="sessionDepartmentId" value="@Convert.ToInt32(Context.Session.GetString("DepartmentId"))" hidden />
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -59,7 +60,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="https://localhost:44323/Dashboard/Index">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
@@ -374,7 +375,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="https://localhost:44323/Account/Login">Logout</a>
+                        <a class="btn btn-primary" href="https://localhost:44323/Account/Login" >Logout</a>
                     </div>
                 </div>
             </div>
@@ -403,6 +404,20 @@
         </script>
 
         <script src="~/js/Account/DashboardName.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = window.location;
+                $('ul.navbar-nav a[href="' + url + '"]').parent().addClass('active');
+                $('ul.navbar-nav a').filter(function () {
+                    return this.href == url;
+                }).parent().addClass('active');
+            });
+        </script>
+
+
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
         @RenderSection("Scripts", required: false)
@@ -465,7 +480,7 @@ else if (Context.Session.GetString("Role") == "Employee")
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="https://localhost:44323/Dashboard/Index">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
@@ -791,6 +806,18 @@ else if (Context.Session.GetString("Role") == "Employee")
         </script>
 
         <script src="~/js/Account/DashboardName.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = window.location;
+                $('ul.navbar-nav a[href="' + url + '"]').parent().addClass('active');
+                $('ul.navbar-nav a').filter(function () {
+                    return this.href == url;
+                }).parent().addClass('active');
+            });
+        </script>
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
         @RenderSection("Scripts", required: false)
