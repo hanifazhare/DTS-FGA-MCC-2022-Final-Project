@@ -2,12 +2,18 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model LeaveManagementWebClient.Models.ViewModels.EmployeeViewModel
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Employee Table Page";
     Layout = "_MainLayout";
 }
 
 <h1>Employee</h1>
+
+
+
+@*<input id="sessionUserId" value="@Convert.ToInt32(Context.Session.GetString("UserId"))" hidden />*@
+<input id="sessionDepartmentId" value="@Convert.ToInt32(Context.Session.GetString("DepartmentId"))" hidden />
 
 <p>
 	@*<a data-bs-toggle="modal" data-bs-target="#createFormModal">Create New</a>*@
@@ -105,7 +111,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -113,8 +119,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form id="formEdit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="id" class="control-label">Id</label>
+                                <input asp-for="id" class="form-control" id="id" name="id" disabled />
+                                <span asp-validation-for="id" class="text-danger"></span>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="firstname" class="control-label">First Name</label>
@@ -130,7 +141,7 @@
                             <div class="form-group">
                                 <label asp-for="genderTypeId" class="form-label">Gender</label>
                                 <select id="genderTypeId" class="form-select">
-                                    <option selected>Choose...</option>
+                                    <option >Choose...</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                 </select>
@@ -165,12 +176,12 @@
     </div>
 </div>
 
-<!-- Modal Edit-->
+<!-- Modal Detail-->
 <div class="modal fade" id="detailFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Employee Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -178,7 +189,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form id="formDetail">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -240,11 +251,19 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Apa Anda yakin akan menghapus data ini?</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-secondary" type="button" onclick="Delete(id)">Cancel</button>
-            </div>
+            <form id="formDelete">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="id" class="control-label">Id</label>
+                    <input asp-for="id" class="form-control" id="id" name="id" />
+                    <span asp-validation-for="id" class="text-danger"></span>
+                </div>
+                <div class="modal-body">Apa Anda yakin akan menghapus data ini?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" onclick="Delete(id)">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

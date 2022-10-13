@@ -3,6 +3,7 @@
 *@
 
 @model LeaveManagementWebClient.Models.Employee
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Account Page";
     Layout = "_MainLayout";
@@ -10,12 +11,14 @@
 
 <h1>Account Detail</h1>
 
+<input id="sessionUserId" value="@Convert.ToInt32(Context.Session.GetString("UserId"))" hidden />
+
 <h4>Account</h4>
 <hr />
 
 <div class="row">
     <div class="col-md-8">
-        <form action="/Dashboard/Account" method="post">
+        <form action="/Dashboard/Account" method="post" id="formAccount">
             <div class="form-group">
                 <label name="Fullname" class="control-label">Fullname</label>
                 <input name="Fullname" class="form-control" id="fullName" disabled />
