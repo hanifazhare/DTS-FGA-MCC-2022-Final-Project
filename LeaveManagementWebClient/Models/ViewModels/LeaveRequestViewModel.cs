@@ -4,11 +4,11 @@
     {
         public int id { get; set; }
 
-        public int LeaveTypeId { get; set; }
+        public int leaveTypeId { get; set; }
 
-        public int LeaveTypeStatusId { get; set; }
+        public int leaveStatusTypeId { get; set; }
 
-        public int UserId { get; set; }
+        public int userId { get; set; }
 
         public int requestedDay { get; set; }
 

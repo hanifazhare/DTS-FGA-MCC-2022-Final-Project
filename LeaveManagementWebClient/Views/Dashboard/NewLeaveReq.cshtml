@@ -1,10 +1,13 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model LeaveManagementWebClient.Models.ViewModels.LeaveRequestViewModel
 @{
     ViewData["Title"] = "Leave Request Page";
     Layout = "_MainLayout";
 }
+
+@*<link rel="stylesheet" href="~/css/Datepicker.css" type="text/css" />*@
 
 <h1>New Leave Request</h1>
 
@@ -23,17 +26,23 @@
                     <option value="3">Cuti Penting</option>
 			    </select>
 			</div>
-            <div class="flex-row d-flex justify-content-center">
-                <div class="col-lg-6 col-11 px-1">
-                    <div class="input-group input-daterange">
-                        <input type="text" id="start" class="form-control text-left mr-2">
-                        <label class="ml-3 form-control-placeholder" id="start-p" for="start">Start Date</label>
-                        <span class="fa fa-calendar" id="fa-1"></span>
-                        <input type="text" id="end" class="form-control text-left ml-2">
-                        <label class="ml-3 form-control-placeholder" id="end-p" for="end">End Date</label>
-                        <span class="fa fa-calendar" id="fa-2"></span>
+            <div class="form-group row">
+                <div class="input-group input-daterange">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label asp-for="startDate" class="control-label">Start Date</label>
+                        <input type="text" mame="startDate" id="startDate" class="form-control" />
+                        <span asp-validation-for="startDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="startDate"  class="control-label">End Date</label>
+                        <input type="text" name="endDate" id="endDate" class="form-control" />
+                        <span asp-validation-for="endDate" class="text-danger"></span>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label name="requestedDays" class="control-label">Requested Days</label>
+                <input name="requestedDays" id="requestedDays" class="form-control" disabled />
             </div>
             <div class="form-group">
                 <label name="reason" class="control-label">Reason</label>
@@ -48,4 +57,5 @@
 
 @section Scripts{
     <script src="~/js/Leave/NewLeaveRequest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 }
