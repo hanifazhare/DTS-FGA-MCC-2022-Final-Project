@@ -24,6 +24,7 @@ namespace LeaveManagementWebAPI.Models
         [ForeignKey("user")]
         public int userId { get; set; }
 
+
         [Required]
         public int requestedDays { get; set; }
 

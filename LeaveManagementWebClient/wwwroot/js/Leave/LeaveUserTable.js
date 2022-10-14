@@ -34,14 +34,14 @@ $(document).ready(function () {
                 render: function (data, type, meta) {
 
                     let statusReq = '';
-                    if (data == "Pending") {
-                        statusReq += '<span class="badge rounded-pill bg-primary">' + data + '</span>';
-                    } else if (data == "Rejected") {
-                        statusReq = '<span class="badge rounded-pill bg-danger">' + data + '</span>';
+                    if (data.name == "Pending") {
+                        statusReq = '<span class="badge rounded-pill bg-primary">' + data.name + '</span>';
+                    } else if (data.name == "Rejected") {
+                        statusReq = '<span class="badge rounded-pill bg-danger">' + data.name + '</span>';
                     } else {
-                        statusReq = '<span class="badge rounded-pill bg-succes">' + data + '</span>';
+                        statusReq = '<span class="badge rounded-pill bg-succes">' + data.name + '</span>';
                     }
-                    return statusReq;
+                    return statusReq  ;
                 }
             },
             {
