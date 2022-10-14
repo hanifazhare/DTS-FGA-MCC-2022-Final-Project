@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $('#employeeTable').DataTable({
+    $('#leaveTable').DataTable({
 
         ajax: {
             url: "https://localhost:44371/api/LeaveRequest/get-by-manager/" + userId + "/" + departmentId,
@@ -8,12 +8,7 @@
         },
         columns: [
             {
-                data: "firstName",
-                render: function (data, type, row) {
-
-                    return data + ' ' + row.lastName;
-                },
-                targets: 0
+                data: 'userId'
             },
             {
                 data: 'leaveType',
@@ -38,12 +33,12 @@
                 render: function (data, type, row) {
 
                     let statusReq = '';
-                    if (data == "Pending") {
+                    if (data.name == "Pending") {
                         statusReq = `<button type="button" onclick="GetDataApprove(${row.id})" class="btn btn-primary btn-sm" >Pending</button>`;
-                    } else if (data == "Rejected") {
-                        statusReq = '<span class="badge rounded-pill bg-danger">' + data + '</span>';
+                    } else if (data.name == "Rejected") {
+                        statusReq = '<span class="badge rounded-pill bg-danger">' + data.name + '</span>';
                     } else {
-                        statusReq = '<span class="badge rounded-pill bg-succes">' + data + '</span>';
+                        statusReq = '<span class="badge rounded-pill bg-succes">' + data.name + '</span>';
                     }
 
                     
@@ -66,32 +61,36 @@ function ApproveFunction(result) {
         showCancelButton: true,
         confirmButtonText: 'Yes',
         denyButtonText: `No`,
-    }).then((result) => {
+    }).then((answer) => {
         /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+        if (answer.isConfirmed) {
+            var obj = new Object();
+            console.log(result);//sesuaikan sendiri nama objectnya dan beserta isinya
             //ini ngambil value dari tiap inputan di form nya
             obj.id = result.data.id;
             obj.leaveTypeId = result.data.leaveTypeId;
             obj.statusTypeId = 2;
             obj.userId = result.data.userId;
-            obj.requestDays = result.data.userId;
+            obj.employeeId = result.data.employeeId;
+            obj.requestedDays = result.data.requestedDays;
             obj.startDate = result.data.startDate;
             obj.endDate = result.data.endDate;
             obj.reason = result.data.reason;
-            ApproveFunction(obj);
-        } else if (result.isDenied) {
+            
+            ApproveFunction2(obj);
+        } else if (answer.isDenied) {
             var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
             //ini ngambil value dari tiap inputan di form nya
             obj.id = result.data.id;
             obj.leaveTypeId = result.data.leaveTypeId;
-            obj.statusTypeId = 2;
+            obj.statusTypeId = 3;
             obj.userId = result.data.userId;
-            obj.requestDays = result.data.userId;
+            obj.employeeId = result.data.employeeId;
+            obj.requestedDays = result.data.requestedDays;
             obj.startDate = result.data.startDate;
             obj.endDate = result.data.endDate;
             obj.reason = result.data.reason;
-            ApproveFunction(obj);
+            ApproveFunction2(obj);
         }
     })
 }
@@ -106,7 +105,7 @@ function GetDataApprove(id) {
     }).fail((error) => {
         Swal.fire(
             'Failed!',
-            'Data has not been deleted',
+            'Something went wrong',
             'error'
         )
         console.log(error);
@@ -116,11 +115,12 @@ function GetDataApprove(id) {
 function ApproveFunction2(obj) {
     var objek = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //ini ngambil value dari tiap inputan di form nya
-    objek.id = obj.id;
-    objek.leaveTypeId = obj.leaveTypeId;
-    objek.statuTypeId = obj.statusTypeId;
-    objek.userId = obj.data.userId;
-    objek.requestedDays = obj.requestedDays;
+    objek.id = parseInt(obj.id);
+    objek.leaveTypeId = parseInt(obj.leaveTypeId);
+    objek.leaveStatusTypeId = parseInt(obj.statusTypeId);
+    objek.userId = parseInt(obj.userId);
+    objek.employeeId = parseInt(obj.employeeId);
+    objek.requestedDays = parseInt(obj.requestedDays);
     objek.startDate = obj.startDate;
     objek.endDate = obj.endDate;
     objek.reason = obj.reason;
@@ -136,6 +136,7 @@ function ApproveFunction2(obj) {
         showLoaderOnConfirm: true,
         preConfirm: (login) => {
             objek.note = login;
+            console.log(objek);
             $.ajax({
                 contentType: "application/json",
                 url: `https://localhost:44371/api/LeaveRequest/edit`,
@@ -148,7 +149,7 @@ function ApproveFunction2(obj) {
                     'Data has been changed',
                     'success'
                 )
-                $('#leaveTypeTable').DataTable().ajax.reload();
+                $('#leaveTable').DataTable().ajax.reload();
 
             }).fail((error) => {
                 Swal.fire(
