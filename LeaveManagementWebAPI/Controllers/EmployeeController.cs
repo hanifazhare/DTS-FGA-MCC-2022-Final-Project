@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LeaveManagementWebAPI.Models.ViewModels;
 using Microsoft.AspNetCore.Cors;
+using LeaveManagementWebAPI.Repositories.Interfaces;
 
 namespace LeaveManagementWebAPI.Controllers
 {
@@ -41,6 +42,17 @@ namespace LeaveManagementWebAPI.Controllers
         {
             var data = _employeeRepository.GetData(id);
             if (data == null)
+                return Ok(new { statusCode = 200, data = "null" });
+
+            return Ok(new { statusCode = 200, data = data });
+        }
+
+        [Route("get-by-manager/{managerId}/{departmentTypeId}")]
+        [HttpGet]
+        public IActionResult GetDataByManagerService(int managerId, int departmentTypeId)
+        {
+            var data = _employeeRepository.GetDataByManager(managerId, departmentTypeId);
+            if (data.Count == 0)
                 return Ok(new { statusCode = 200, data = "null" });
 
             return Ok(new { statusCode = 200, data = data });

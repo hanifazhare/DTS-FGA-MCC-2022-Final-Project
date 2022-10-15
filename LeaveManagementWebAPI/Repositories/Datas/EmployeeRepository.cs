@@ -34,6 +34,15 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 .FirstOrDefault(model => model.id == id);
         }
 
+        public List<Employee> GetDataByManager(int managerId, int departmentTypeId)
+        {
+            return _dbContext.Employees
+                .Include(model => model.genderType)
+                .Include(model => model.departmentType)
+                .Where(model => model.managerId == managerId && model.departmentTypeId == departmentTypeId)
+                .ToList();
+        }
+
         public int EditData(EmployeeViewModel employeeViewModel)
         {
             int result = 0;

@@ -34,7 +34,14 @@ namespace LeaveManagementWebClient.Controllers
                 HttpContext.Session.SetString("Role", data.Data.role);
                 HttpContext.Session.SetString("UserId", Convert.ToString(data.Data.id) );
                 HttpContext.Session.SetString("DepartmentId", Convert.ToString(data.Data.departmentTypeId));
-                return RedirectToAction("Index", "Dashboard");
+                
+                var Role = HttpContext.Session.GetString("Role");
+                if (Role == "Manager")
+                    return RedirectToAction("LeaveReq", "Dashboard");
+                else
+                {
+                    return RedirectToAction("NewLeaveReq", "Dashboard");
+                }
             }
             return View();
         }

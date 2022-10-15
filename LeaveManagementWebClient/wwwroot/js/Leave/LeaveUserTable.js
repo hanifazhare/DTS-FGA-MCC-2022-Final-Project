@@ -18,10 +18,20 @@ $(document).ready(function () {
                 }
             },
             {
-                data: "startDate"
+                data: "startDate",
+                render: function (data, type, row) {
+                    const date = new Date(data);
+                    const formatDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                    return formatDate;
+                }
             },
             {
-                data: "endDate"
+                data: "endDate",
+                render: function (data, type, row) {
+                    const date = new Date(data);
+                    const formatDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                    return formatDate;
+                }
             },
             {
                 data: "requestedDays"
@@ -32,20 +42,28 @@ $(document).ready(function () {
             {
                 data: 'leaveStatusType',
                 render: function (data, type, meta) {
-
                     let statusReq = '';
                     if (data.name == "Pending") {
-                        statusReq = '<span class="badge rounded-pill bg-primary">' + data.name + '</span>';
+                        statusReq = '<button type="button" class="btn btn-outline-primary btn-sm" disabled>' + data.name +'</button>';
                     } else if (data.name == "Rejected") {
-                        statusReq = '<span class="badge rounded-pill bg-danger">' + data.name + '</span>';
+                        statusReq = '<button type="button" class="btn btn-outline-danger btn-sm" disabled>' + data.name +'</button>';
                     } else {
-                        statusReq = '<span class="badge rounded-pill bg-succes">' + data.name + '</span>';
+                        statusReq = '<button type="button" class="btn btn-outline-success btn-sm" disabled>' + data.name +'</button>';
                     }
                     return statusReq  ;
                 }
             },
             {
-                data: "note"
+                data: "note",
+                render: function (data, type, meta) {
+                    let content = '';
+                    if (data == null) {
+                        content = '<p>-</p>';
+                    } else {
+                        content = data;
+                    }
+                    return content;
+                }
             }
         ]
     });

@@ -8,7 +8,10 @@
         },
         columns: [
             {
-                data: 'userId'
+                data: 'user',
+                render: function (data, type, row) {
+                    return data.employee.firstName + ' ' + data.employee.lastName;
+                }
             },
             {
                 data: 'leaveType',
@@ -17,10 +20,20 @@
                 }
             },
             {
-                data: "startDate"
+                data: "startDate",
+                render: function (data, type, row) {
+                    const date = new Date(data);
+                    const formatDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                    return formatDate;
+                }
             },
             {
-                data: "endDate"
+                data: "endDate",
+                render: function (data, type, row) {
+                    const date = new Date(data);
+                    const formatDate = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+                    return formatDate;
+                }
             },
             {
                 data: "requestedDays"
@@ -31,17 +44,38 @@
             {
                 data: 'leaveStatusType',
                 render: function (data, type, row) {
-
                     let statusReq = '';
                     if (data.name == "Pending") {
-                        statusReq = `<button type="button" onclick="GetDataApprove(${row.id})" class="btn btn-primary btn-sm" >Pending</button>`;
+                        statusReq = '<button type="button" class="btn btn-outline-primary btn-sm" disabled>' + data.name + '</button>';
                     } else if (data.name == "Rejected") {
-                        statusReq = '<span class="badge rounded-pill bg-danger">' + data.name + '</span>';
+                        statusReq = '<button type="button" class="btn btn-outline-danger btn-sm" disabled>' + data.name + '</button>';
                     } else {
-                        statusReq = '<span class="badge rounded-pill bg-succes">' + data.name + '</span>';
+                        statusReq = '<button type="button" class="btn btn-outline-success btn-sm" disabled>' + data.name + '</button>';
                     }
-
-                    
+                    return `${statusReq}`;
+                }
+            },
+            {
+                data: "note",
+                render: function (data, type, meta) {
+                    let content = '';
+                    if (data == null) {
+                        content = '<p>-</p>';
+                    } else {
+                        content = data;
+                    }
+                    return content;
+                }
+            },
+            {
+                data: 'leaveStatusType',
+                render: function (data, type, row) {
+                    let statusReq = '';
+                    if (data.name == "Pending") {
+                        statusReq = `<button type="button" class="btn btn-primary btn-sm" onclick="GetDataApprove(${row.id})" >Approve</button>`;
+                    } else {
+                        statusReq = '<button type="button" class="btn btn-light btn-sm" disabled>None</button>';
+                    }
                     return `${statusReq}`;
                 }
             }

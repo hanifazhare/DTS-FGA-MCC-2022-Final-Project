@@ -1,9 +1,12 @@
-﻿$(document).ready(function () {
+﻿const userId = parseInt($("#sessionUserId").val());
+const departmentId = parseInt($("#sessionDepartmentId").val());
+
+$(document).ready(function () {
 
     $('#employeeTable').DataTable({
 
         ajax: {
-            url: "https://localhost:44371/api/Employee/",
+            url: "https://localhost:44371/api/Employee/get-by-manager/" + userId + "/" + departmentId,
             dataType: "JSON"
         },
         columns: [
@@ -48,8 +51,7 @@
 
 });
 
-const userId = parseInt($("#sessionUserId").val());
-const departmentId = parseInt($("#sessionDepartmentId").val());
+
 
 function Insert(event) {
     event.preventDefault();

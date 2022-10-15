@@ -10,6 +10,8 @@ namespace LeaveManagementWebAPI.Repositories.Interfaces
 
         Employee GetData(int id);
 
+        List<Employee> GetDataByManager(int managerId, int departmentTypeId);
+
         int EditData(EmployeeViewModel employeeViewModel);
 
         int CreateData(EmployeeViewModel employeeViewModel);

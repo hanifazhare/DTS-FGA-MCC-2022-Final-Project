@@ -25,6 +25,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 .Include(model => model.leaveType)
                 .Include(model => model.leaveStatusType)
                 .Include(model => model.user)
+                .Include(model => model.user.employee)
                 .FirstOrDefault(model => model.id == id);
         }
 
@@ -34,6 +35,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 .Include(model => model.leaveType)
                 .Include(model => model.leaveStatusType)
                 .Include(model => model.user)
+                .Include(model => model.user.employee)
                 .Where(model => model.user.employee.managerId == managerId && model.user.employee.departmentTypeId == departmentTypeId)
                 .ToList();
         }
@@ -44,6 +46,7 @@ namespace LeaveManagementWebAPI.Repositories.Datas
                 .Include(model => model.leaveType)
                 .Include(model => model.leaveStatusType)
                 .Include(model => model.user)
+                .Include(model => model.user.employee)
                 .Where(model => model.user.id == userId)
                 .ToList();
         }

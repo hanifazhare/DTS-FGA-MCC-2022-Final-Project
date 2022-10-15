@@ -1,11 +1,19 @@
-﻿$(document).ready(function(){
+﻿let startDate;
+let endDate;
+
+const userId = parseInt($("#sessionUserId").val());
+var nowDate = new Date();
+var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
+
+$(document).ready(function () {
     $('.input-daterange').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         calendarWeeks : true,
         clearBtn: true,
         disableTouchKeyboard: true,
-        daysOfWeekDisabled: '0,6'
+        daysOfWeekDisabled: '0,6',
+        startDate: today
     });
 });
 
@@ -16,34 +24,6 @@ myLink.forEach(function(link){
     });
 });
 
-//const startDate = document.querySelector('#startDate').value;
-//const endDate = $("#endDate").val();
-
-//console.log(startDate);
-//console.log(endDate);
-
-function getBusinessDateCount(startDate, endDate) {
-    var elapsed, daysBeforeFirstSaturday, daysAfterLastSunday;
-    var ifThen = function (a, b, c) {
-        return a == b ? c : a;
-    };
-
-    elapsed = endDate - startDate;
-    elapsed /= 86400000;
-
-    daysBeforeFirstSunday = (7 - startDate.getDay()) % 7;
-    daysAfterLastSunday = endDate.getDay();
-
-    elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
-    elapsed = (elapsed / 7) * 5;
-    elapsed += ifThen(daysBeforeFirstSunday - 1, -1, 0) + ifThen(daysAfterLastSunday, 6, 5);
-
-    return Math.ceil(elapsed);
-}
-
-let startDate;
-let endDate;
-
 $("#endDate").on('change keyup paste', function () {
     startDate = $('#startDate').datepicker('getDate');
     endDate = $('#endDate').datepicker('getDate');
@@ -51,7 +31,7 @@ $("#endDate").on('change keyup paste', function () {
     console.log(startDate);
     console.log(endDate);
 
-    if (startDate < endDate) {
+    if (startDate < endDate || startDate == endDate) {
         var days = (endDate - startDate) / 1000 / 60 / 60 / 24;
 
         var Weeks = Math.round(days) / 7;
@@ -65,8 +45,6 @@ $("#endDate").on('change keyup paste', function () {
         $("#requestedDays")[0].value = Math.round(puredays) + 1;
     }
 });
-
-const userId = parseInt($("#sessionUserId").val());
 
 function Insert(event) {
     event.preventDefault();
@@ -115,3 +93,28 @@ function Insert(event) {
         console.log(error);
     })
 };
+
+$.ajax({
+    url: 'https://localhost:44371/api/Employee/' + userId
+}).done((result) => {
+    console.log(result);
+    getLeaveTypeByGender(result.data.genderTypeId);
+}).fail((error) => {
+    console.log(error);
+}); 
+
+function getLeaveTypeByGender(id) {
+    $.ajax({
+        url: 'https://localhost:44371/api/LeaveType/get-by-gender/' + id
+    }).done((result) => {
+        console.log(result);
+        test = "";
+        $.each(result.data, function (key, val) {
+            test += `<option value="${val.id}">${val.name}</option>`;
+        })
+        console.log(test);
+        $("#leaveType").html(test);
+    }).fail((error) => {
+        console.log(error);
+    });
+}

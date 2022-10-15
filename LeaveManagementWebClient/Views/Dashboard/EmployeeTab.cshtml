@@ -53,7 +53,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create new data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create new employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -75,11 +75,22 @@
                                     <span asp-validation-for="lasttname" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label asp-for="genderTypeId" class="form-label">Gender</label>
                                 <select id="genderTypeId" class="form-select" name="genderTypeId">
                                     <option selected>Choose...</option>
                                     <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                                <select class="custom-select" id="leaveType">
+                                </select>
+                            </div>*@
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                                </div>
+                                <select class="custom-select" id="genderTypeId" name="genderTypeId">
+                                    <option selected value="1">Male</option>
                                     <option value="2">Female</option>
                                 </select>
                             </div>
